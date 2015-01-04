@@ -7,16 +7,52 @@
 //
 
 #import "AppDelegate.h"
-
+#import "FeedTableViewController.h"
+#import <Parse/Parse.h>
+#import <ParseFacebookUtils/PFFacebookUtils.h>
 @interface AppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation AppDelegate{
+     
+}
+@synthesize window;
+@synthesize Main;
+@synthesize locationManager;
 
+@synthesize myViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [Parse setApplicationId:@"0C5QpsRBnb5LfrFQsX9ZBp4RwzYhWJhTuiM4xNAc"
+                  clientKey:@"XTeK9dvckHJSWlQepMc20dujmc8IJ8Gm4kxuTUnr"];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    [PFFacebookUtils initializeFacebook];
+    
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    
+//    self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+    
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+//    self.locationManager.distanceFilter = 1;
+//    [self.locationManager startUpdatingLocation];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds] ];
+    Main = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    self.myViewController = [Main instantiateInitialViewController];
+    
+    self.window.rootViewController = self.myViewController;
+    [self.window makeKeyAndVisible];
+  
+
+    
+//    
+//    NSLog(@"this shit = %d", [FBSession activeSession].isOpen);
     return YES;
 }
 
@@ -34,12 +70,24 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
+
+
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[PFFacebookUtils session] close];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [FBAppCall handleOpenURL:url
+                  sourceApplication:sourceApplication
+                        withSession:[PFFacebookUtils session]];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+//    NSLog(@"%@", [locations lastObject]);
 }
 
 @end

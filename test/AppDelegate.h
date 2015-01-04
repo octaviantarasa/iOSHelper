@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+#import <Parse/Parse.h>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-
+@property (strong, nonatomic) UIViewController *myViewController;
+@property (strong, nonatomic) UIStoryboard *Main;
+@property (strong, nonatomic) CLLocationManager *locationManager;
 @end
 
