@@ -9,13 +9,16 @@
 #import "QuickViewController.h"
 #import <Parse/Parse.h>
 @implementation QuickViewController
-@synthesize sendHelp,userId,problemId;
+@synthesize sendHelp,userId,problemId,picker;
 
 - (IBAction)send:(id)sender{
+    
+    NSNumber *min = [NSNumber numberWithInteger:[picker minuteInterval]];
     PFObject *goTo = [PFObject objectWithClassName:@"GoTo"];
     goTo[@"send_user_id"] = [PFUser currentUser].objectId;
     goTo[@"user_id"] = userId;
     goTo[@"problem_id"] = problemId;
+    goTo[@"time"] = min;
     [goTo save];
     [self.navigationController popToRootViewControllerAnimated:YES];
   

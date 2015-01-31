@@ -10,7 +10,7 @@
 #import "CommentsTableViewCell.h"
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
-#import "FeedTableViewController.h"
+
 @interface CommentsViewController ()
 
 @end
@@ -138,7 +138,7 @@
         [self textFieldDidEndEditing:commentTextField];
         [self getDataFromParse];
         [myCommentsTableView reloadData];
-        
+       
     }
 }
 - (IBAction) deleteComment:(id)sender{

@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewProblemViewController : UIViewController
+
+@interface NewProblemViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (weak,nonatomic) IBOutlet UITextField *problemTitle;
 @property (weak,nonatomic) IBOutlet UITextField *problemDescription;
 @property (weak,nonatomic) IBOutlet UITextField *problemLandmark;
 @property (weak,nonatomic) IBOutlet UITextField *problemDirection;
 @property (weak,nonatomic) IBOutlet UISegmentedControl *problemSeverity;
-
+-(IBAction)takePhoto:(id)sender;
 @end

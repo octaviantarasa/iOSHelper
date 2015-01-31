@@ -12,4 +12,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *sendHelp;
 @property (strong, nonatomic) NSString *problemId;
 @property (strong, nonatomic) NSString *userId;
+@property (weak, nonatomic) IBOutlet UIDatePicker *picker;
 @end

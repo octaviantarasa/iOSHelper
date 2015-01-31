@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
+
+
+
 @interface FeedTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
 {
     int selectedIndex;
@@ -18,6 +21,8 @@
     NSArray *textArray;
     
 }
+
+
 @property FBLoginView *loginView;
 
 @property (retain, nonatomic) IBOutlet UITableView *myTableView;
@@ -28,8 +33,10 @@
 @property NSMutableArray *problemsArray;
 @property NSInteger numberOfRow;
 @property UIRefreshControl *refreshControl;
-- (IBAction)loginButtonTouchHandler:(id)sender;
+- (IBAction) logOutButtonTouchHandler:(id)sender;
 - (IBAction) quickSolve:(id)sender;
 - (IBAction) showComments:(id)sender;
 - (IBAction) showProblem:(id)sender;
+
 @end
+

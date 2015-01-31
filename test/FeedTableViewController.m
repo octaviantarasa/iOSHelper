@@ -14,6 +14,7 @@
 #import "CommentsViewController.h"
 #import "NewProblemViewController.h"
 #import "QuickViewController.h"
+#import "InitialFeedTableViewController.h"
 #import <Parse/Parse.h>
 #import "AppDelegate.h"
 @interface FeedTableViewController ()
@@ -37,9 +38,7 @@
     [refresh addTarget:self action:@selector(getNewData) forControlEvents:UIControlEventValueChanged];
     [self.myTableView addSubview:refresh];
     self.refreshControl = refresh;
-    
-    
-    
+   
     
 }
 
@@ -77,6 +76,7 @@
                     }
                     else {
                         [self.problemsArray addObjectsFromArray:objects];
+//                        [self getNearestLocation];
                         [self.myTableView reloadData];
                        
                     }
@@ -115,6 +115,11 @@
 
 - (IBAction)showProblem:(id)sender{
     [self performSegueWithIdentifier:@"showProblem" sender:sender];
+}
+- (IBAction) logOutButtonTouchHandler:(id)sender{
+    
+     [PFUser logOut];
+    [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
 
@@ -218,12 +223,42 @@
         quick.problemId = clickedCell.problemId;
         quick.userId = clickedCell.userId;
     }
+    else if([[ segue identifier] isEqualToString:@"logOutSegue"]){
+      InitialFeedTableViewController *initial = [segue destinationViewController];
+        AppDelegate *app = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+//        app.window.rootViewController = initial;
+        app.myViewController = initial;
+        
+    }
     
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [problemsArray count];
 }
+
+- (void) getNearestLocation
+{
+    
+    PFObject *problem;
+    PFGeoPoint *point;
+    NSString *user;
+    for (problem in problemsArray) {
+        
+        point = [problem objectForKey:@"location"];
+        user = [problem objectForKey:@"user_id"];
+        CLLocation *locPoint = [[CLLocation alloc] initWithLatitude:point.latitude longitude:point.longitude];
+        CLLocation *locUser  = [[CLLocation alloc] initWithLatitude:[locationManager.location coordinate].latitude longitude:[locationManager.location coordinate].longitude];
+        CLLocationDistance dist = [locPoint distanceFromLocation:locUser ];
+        BOOL b = [user isEqualToString:[PFUser currentUser].objectId];
+        if (dist > 1000 && !b) {
+            [self.problemsArray removeObject:problem];
+        }
+//        NSLog(@"distance ======= %f",dist);
+        
+    }
+}
+
 
 //dispatch_sync(dispatch_get_main_queue(), ^{
 //    [locationManager startUpdatingLocation];

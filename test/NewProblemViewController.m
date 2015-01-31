@@ -8,6 +8,7 @@
 
 #import "NewProblemViewController.h"
 #import "AppDelegate.h"
+
 #import <Parse/Parse.h>
 @interface NewProblemViewController ()
 
@@ -29,6 +30,7 @@
 
 - (IBAction)createNewProblem:(id)sender{
     AppDelegate *appD = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+
     [appD.locationManager stopUpdatingLocation];
     appD.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     [appD.locationManager startUpdatingLocation];
@@ -78,6 +80,20 @@
 
     
     [self.navigationController popViewControllerAnimated:NO];
+}
+
+-(IBAction)takePhoto:(id)sender
+{
+    if ( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate =self;
+        imagePicker.sourceType=UIImagePickerControllerSourceTypeCamera;
+//        imagePicker.mediaTypes =[NSArray arrayWithObjects:(NSString*) kUTTypeImage, nil];
+        imagePicker.allowsEditing =NO;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+//        newMedia=YES ;
+    }
 }
 /*
 #pragma mark - Navigation

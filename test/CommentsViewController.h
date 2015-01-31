@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "FeedTableViewController.h"
+//@protocol CommentsViewControllerDelegate;
+
 @interface CommentsViewController : UIViewController <UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate>
 @property (strong,nonatomic) NSArray *commentObjects;
 @property (strong, nonatomic) NSString *problemId;
@@ -16,5 +19,18 @@
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
 @property (weak, nonatomic) IBOutlet UITableView *myCommentsTableView;
 @property (strong, nonatomic) NSString *localCommentId;
+
+//@property (weak,nonatomic) id <CommentsViewControllerDelegate> delegate;
+
+
 - (IBAction)commentButton:(id)sender;
+
+
 @end
+
+
+//@protocol CommentsViewControllerDelegate <NSObject>
+//
+//- (void) getDataFromParse;
+//
+//@end

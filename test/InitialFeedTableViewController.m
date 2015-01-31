@@ -35,8 +35,9 @@
         [locationManager requestAlwaysAuthorization];
         
     }
-    locationManager.distanceFilter = 500;
+    locationManager.distanceFilter = 1;
     [locationManager startUpdatingLocation];
+
     [self getDataFromParse];
 }
 
@@ -49,6 +50,7 @@
     
     
     PFQuery *query = [PFQuery queryWithClassName:@"Problems"];
+    
     if([problemsArray count]){
         [problemsArray removeAllObjects];
     }
@@ -59,7 +61,7 @@
         }
         else {
             self.problemsArray =  [objects mutableCopy];
-            
+//            [self getNearestLocation];
             [self.myTableView reloadData];
             
         }
@@ -160,7 +162,27 @@
     return cell;
     
 }
+- (void) getNearestLocation
+{
+    PFObject *problem;
+    PFGeoPoint *point;
+    NSString *user;
+    for (problem in problemsArray) {
+        
+        point = [problem objectForKey:@"location"];
+        user = [problem objectForKey:@"user_id"];
+        CLLocation *locPoint = [[CLLocation alloc] initWithLatitude:point.latitude longitude:point.longitude];
+        CLLocation *locUser  = [[CLLocation alloc] initWithLatitude:[locationManager.location coordinate].latitude longitude:[locationManager.location coordinate].longitude];
+        CLLocationDistance dist = [locPoint distanceFromLocation:locUser ];
+        BOOL b = [user isEqualToString:[PFUser currentUser].objectId];
+        if (dist > 1000 && !b) {
+            [self.problemsArray removeObject:problem];
+        }
+        NSLog(@"distance ======= %f",dist);
+        
+    }
 
+}
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"ToDetailedFeed"]) {
