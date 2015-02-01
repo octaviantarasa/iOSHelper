@@ -28,9 +28,9 @@ static NSString * const FUITableViewControllerCellReuseIdentifier = @"FUITableVi
     // Do any additional setup after loading the
     self.title = @"Auto Helper:Problems";
     self.view.
-    backgroundColor = [UIColor greenSeaColor];
-    self.myTableView.separatorColor = [UIColor greenSeaColor];
-    self.myTableView.backgroundColor = [UIColor cloudsColor];
+    backgroundColor = [UIColor turquoiseColor];
+    self.myTableView.separatorColor = [UIColor midnightBlueColor];
+    self.myTableView.backgroundColor = [UIColor lightGrayColor];
     
     [self.myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:FUITableViewControllerCellReuseIdentifier];
     
@@ -127,12 +127,20 @@ static NSString * const FUITableViewControllerCellReuseIdentifier = @"FUITableVi
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell";
+    UIRectCorner corners = 0.2;
     InitialProblemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    [cell configureFlatCellWithColor:[UIColor cloudsColor]
+                    selectedColor:[UIColor cloudsColor]
+                roundingCorners:corners];
     
     PFObject *problem = [self.problemsArray objectAtIndex:indexPath.row];
     
     [cell.problemTitle setText:[problem objectForKey:@"title"]];
+    [cell.problemTitle setTextColor:[UIColor wetAsphaltColor]];
+    [cell.problemComment setTextColor:[UIColor wetAsphaltColor]];
+    [cell.problemHour setTextColor:[UIColor wetAsphaltColor]];
     
+   // [cell.textLabel setTextColor:[UIColor whiteColor]];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"M/d H:m"];
     NSString *stringFromDate = [formatter stringFromDate:[problem objectForKey:@"date"]];
