@@ -5,6 +5,8 @@
 //  Created by Tarasa on 12/9/14.
 //  Copyright (c) 2014 Tarasa. All rights reserved.
 //
+#import "UITableViewCell+FlatUI.h"
+#import "UIColor+FlatUI.h"
 
 #import "InitialFeedTableViewController.h"
 #import "InitialProblemTableViewCell.h"
@@ -15,7 +17,7 @@
 @interface InitialFeedTableViewController ()
 
 @end
-
+static NSString * const FUITableViewControllerCellReuseIdentifier = @"FUITableViewControllerCellReuseIdentifier";
 @implementation InitialFeedTableViewController{
     CLLocationManager *locationManager;
 }
@@ -23,7 +25,15 @@
 @synthesize currentUser;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the
+    self.title = @"Auto Helper:Problems";
+    self.view.
+    backgroundColor = [UIColor greenSeaColor];
+    self.myTableView.separatorColor = [UIColor greenSeaColor];
+    self.myTableView.backgroundColor = [UIColor cloudsColor];
+    
+    [self.myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:FUITableViewControllerCellReuseIdentifier];
+    
     
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
