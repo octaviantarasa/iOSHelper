@@ -15,10 +15,11 @@
 @end
 
 @implementation NewProblemViewController
-@synthesize problemDescription,problemDirection,problemLandmark,problemSeverity,problemTitle;
+@synthesize problemDescription,problemDirection,problemLandmark,problemSeverity,problemTitle,imageView;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem.backBarButtonItem setAction:@selector(performBackNavigation:)];
+  
     // Do any additional setup after loading the view.
 }
 
@@ -40,22 +41,43 @@
     if (![problemTitle.text isEqualToString:@""]) {
         if (![problemDescription.text isEqualToString:@""]) {
             if (!problemSeverity.selected) {
-                PFObject *problem =  [PFObject objectWithClassName:@"Problems"];
-                problem[@"title"] = problemTitle.text;
-                problem[@"text"] = problemDescription.text;
-                problem[@"severity"] = [problemSeverity titleForSegmentAtIndex:problemSeverity.selectedSegmentIndex];
-                PFGeoPoint *loc = [PFGeoPoint geoPointWithLocation:appD.locationManager.location];
-                problem[@"location"] = loc;
-                problem[@"user_id"] = [PFUser currentUser].objectId;
-                problem[@"date"] = [NSDate date];
-                [problem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    problemTitle.text = @"";
-                    problemDescription.text = @"";
-                    problemDirection.text = @"";
-                    problemLandmark.text = @"";
-                    [self.navigationController popToRootViewControllerAnimated:TRUE];
-                
+                NSData *imageData = UIImagePNGRepresentation(imageView.image);
+                PFFile *imageFile = [PFFile fileWithName:problemTitle.text data:imageData];
+                [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (!error) {
+                        if (succeeded) {
+                            PFObject *problem =  [PFObject objectWithClassName:@"Problems"];
+                            problem[@"title"] = problemTitle.text;
+                            problem[@"text"] = problemDescription.text;
+                            problem[@"severity"] = [problemSeverity titleForSegmentAtIndex:problemSeverity.selectedSegmentIndex];
+                            PFGeoPoint *loc = [PFGeoPoint geoPointWithLocation:appD.locationManager.location];
+                            problem[@"location"] = loc;
+                            problem[@"user_id"] = [PFUser currentUser].objectId;
+                            problem[@"date"] = [NSDate date];
+                            problem[@"picture"] = imageFile;
+                            [problem save];
+                            problemTitle.text = @"";
+                            problemDescription.text = @"";
+                            problemDirection.text = @"";
+                            problemLandmark.text = @"";
+                            [self.navigationController popToRootViewControllerAnimated:TRUE];
+//                            [problem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//                                
+//                                
+//                            }];
+                            
+                            
+                        }
+                    } else {
+                        // Handle error
+                    }        
                 }];
+                
+                
+                
+                
+                
+               
                 
                 
             }
@@ -94,6 +116,42 @@
         [self presentViewController:imagePicker animated:YES completion:nil];
 //        newMedia=YES ;
     }
+    else if( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
+        
+        UIImagePickerController *imagePicker =[[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                imagePicker.allowsEditing = NO;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+        
+
+    }
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+//    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+            UIImage *image = [info
+                          objectForKey:UIImagePickerControllerOriginalImage];
+        
+        imageView.image = image;
+        
+//        if (newMedia)
+//            UIImageWriteToSavedPhotosAlbum(image,
+//                                           self,
+//                                           @selector(image:finishedSavingWithError:contextInfo:),
+//                                           nil);
+//    }
+//    else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
+//    {
+//        // Code here to support video if enabled
+//    }
+    
 }
 /*
 #pragma mark - Navigation

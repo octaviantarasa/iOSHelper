@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *problemText;
 @property (weak, nonatomic) IBOutlet UIButton *problemComment;
 @property (weak, nonatomic) IBOutlet UILabel *problemHour;
-@property (weak, nonatomic) IBOutlet UIButton *quickButton;
+@property (strong, nonatomic) IBOutlet UIButton *quickButton;
 @property (strong, nonatomic) NSString *problemId;
 @property (strong, nonatomic) NSString *userId;
 @end

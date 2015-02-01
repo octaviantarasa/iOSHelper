@@ -15,5 +15,6 @@
 @property (weak,nonatomic) IBOutlet UITextField *problemLandmark;
 @property (weak,nonatomic) IBOutlet UITextField *problemDirection;
 @property (weak,nonatomic) IBOutlet UISegmentedControl *problemSeverity;
+@property (weak,nonatomic) IBOutlet UIImageView *imageView;
 -(IBAction)takePhoto:(id)sender;
 @end
