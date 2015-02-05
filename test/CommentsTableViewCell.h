@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <ParseUI/ParseUI.h>
 @interface CommentsTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *commentText;
 @property (weak, nonatomic) IBOutlet UILabel *commentUser;
 @property (weak, nonatomic) IBOutlet UILabel *commentHour;
-@property (weak, nonatomic) IBOutlet UIImageView *commentImage;
+@property (weak, nonatomic) IBOutlet PFImageView *commentImage;
 @property (weak, nonatomic) IBOutlet UIButton *commentDelete;
 @property (strong, nonatomic) NSString *commentId;
 @end

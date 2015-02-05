@@ -116,34 +116,57 @@
     static NSString *CellIdentifier = @"Cell";
     UserActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
+    cell.tag = indexPath.row;
+    
     PFObject *activity = [self.activityArray objectAtIndex:indexPath.row];
     
+    cell.problem.text = nil;
+    cell.user.text = nil;
+    
+    dispatch_queue_t downloadQueue1 = dispatch_queue_create("Data Downloader", NULL);
+    dispatch_async(downloadQueue1, ^{
+        PFQuery *problems = [PFQuery queryWithClassName:@"Problems"];
+        [problems whereKey:@"objectId" equalTo:[activity objectForKey:@"problem_id"]];
+        [problems getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (indexPath.row == cell.tag) {
+                    cell.problem.text = [object objectForKey:@"title"];
+                }
+
+            });
+        }];
+    });
     
     
-    PFQuery *problems = [PFQuery queryWithClassName:@"Problems"];
-    [problems whereKey:@"objectId" equalTo:[activity objectForKey:@"problem_id"]];
-    PFObject *problem = [problems getFirstObject];
-    cell.problem.text = [problem objectForKey:@"title"];
-    
-    
-    
-    
-    
-    if ([[activity objectForKey:@"user_id"] isEqual:[PFUser currentUser].objectId]) {
+    if ([[activity objectForKey:@"user_id"] isEqual:[PFUser currentUser].objectId])
+    {
         cell.user.text = @"You";
-    }else{
-        PFQuery *users = [PFQuery queryWithClassName:@"_User"];
-        [users whereKey:@"objectId" equalTo:[activity objectForKey:@"user_id"]];
-        PFObject *user  = [users getFirstObject];
+    }
+    else
+    {
+        dispatch_queue_t downloadQueue1 = dispatch_queue_create("Data Downloader", NULL);
+        dispatch_async(downloadQueue1, ^{
+            PFQuery *users = [PFQuery queryWithClassName:@"_User"];
+            [users whereKey:@"objectId" equalTo:[activity objectForKey:@"user_id"]];
+            [users getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (indexPath.row == cell.tag)
+                    {
+                        cell.user.text = [object objectForKey:@"name"];
+                    }
+                });
+            }];
+        });
         
-        cell.user.text = [user objectForKey:@"name"];
+
     }
     
+    cell.date.text = nil;
     
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"M/d H:m"];
-        NSString *stringFromDate = [formatter stringFromDate:[activity objectForKey:@"date"]];
-        cell.date.text = stringFromDate;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"M/d H:m"];
+    NSString *stringFromDate = [formatter stringFromDate:[activity objectForKey:@"date"]];
+    cell.date.text = stringFromDate;
 
     
     

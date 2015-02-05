@@ -63,10 +63,11 @@
     
     
     PFObject *comment = [self.commentObjects objectAtIndex:indexPath.row];
-    if (![[PFUser currentUser].objectId isEqual:[comment objectForKey:@"user_id"]]) {
+    if (![[PFUser currentUser].objectId isEqual:[comment objectForKey:@"user_id"]])
+    {
         cell.commentDelete.hidden = YES;
-        
     }
+    
     cell.commentDelete.tag = indexPath.row;
     cell.commentId = comment.objectId;
     cell.commentText.text = [comment objectForKey:@"text"];
@@ -75,54 +76,61 @@
     NSString *stringFromDate = [formatter stringFromDate:[comment objectForKey:@"date"]];
     cell.commentHour.text = stringFromDate;
     
-    PFQuery *User = [PFQuery queryWithClassName:@"_User"];
-       
-    [User whereKey :@"objectId" equalTo:[comment objectForKey:@"user_id"]];
-    PFObject *tmpUser = [User getFirstObject];
-    cell.commentUser.text = [tmpUser objectForKey:@"name" ];
+    if ([comment objectForKey:@"userName"]) {
+        [cell.commentUser setText:[comment objectForKey:@"userName"]] ;
+    }
     
+    cell.commentImage.image = nil;
     
-  
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        
-        PFFile *imageFile = [comment objectForKey:@"image"];
-        
-        [imageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
-            if (!error) {
-                if (imageData != nil) {
-                    // Set the images using the main thread to avoid non-appearing images, due to the UI not updating
-                    // (The UI always runs on the main thread)
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        // 4. Set the image in the cell
-                        cell.commentImage.image = [UIImage imageWithData:imageData];
-                        [cell setNeedsLayout];
-                    });
-                }
-                
-            }
-        }];
-        
-        // Add a check to add a default image if there is not parse image available
-    });
-
+    if ([comment objectForKey:@"image"])
+    {
+        cell.commentImage.file = [comment objectForKey:@"image"];
+        [cell.commentImage loadInBackground];
+    }
     
     return cell;
 }
 
 - (void) getDataFromParse{
-    PFQuery *query = [PFQuery queryWithClassName:@"Comments"];
-    [query whereKey:@"problem_id" equalTo:self.problemId];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (error) {
-            NSLog(@"Error %@ %@", error, [error userInfo]);
-        }
-        else {
-            self.commentObjects = objects;
-            [self.myCommentsTableView reloadData];
-            
-        }
-    }];
+    dispatch_queue_t downloadQueue1 = dispatch_queue_create("Data Downloader", NULL);
+    dispatch_async(downloadQueue1, ^{
+        PFQuery *query = [PFQuery queryWithClassName:@"Comments"];
+        [query whereKey:@"problem_id" equalTo:self.problemId];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (error)
+            {
+                NSLog(@"Error %@ %@", error, [error userInfo]);
+            }
+            else
+            {
+                self.commentObjects = objects;
+                [self.myCommentsTableView reloadData];
+                
+                __block NSNumber *lock = [NSNumber numberWithInt:1];
+                __block int numberOfThreads = (int)(self.commentObjects.count);
+                for (PFObject *object in self.commentObjects)
+                {
+                    PFQuery *User = [PFQuery queryWithClassName:@"_User"];
+                    
+                    [User whereKey :@"objectId" equalTo:[object objectForKey:@"user_id"]];
+                    [User getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                        [object setObject:[object objectForKey:@"name"] forKey:@"userName"];
+                        @synchronized(lock)
+                        {
+                            numberOfThreads--;
+                            if(numberOfThreads < 1)
+                            {
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self.myCommentsTableView reloadData];
+                                });
+                            }
+                        }
+                    }];
+
+                }
+            }
+        }];
+    });
 }
 - (IBAction)commentButton:(id)sender{
     NSString *commentText = [commentTextField text];
