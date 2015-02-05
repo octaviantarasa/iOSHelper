@@ -122,7 +122,7 @@
     PFObject *problem = [self.problemsArray objectAtIndex:indexPath.row];
     
     [cell.problemTitle setText:[problem objectForKey:@"title"]];
-    
+
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"M/d H:m"];
     NSString *stringFromDate = [formatter stringFromDate:[problem objectForKey:@"date"]];

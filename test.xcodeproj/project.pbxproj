@@ -32,6 +32,7 @@
 		76AC45081A14CC4A006A853A /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76AC45071A14CC4A006A853A /* FacebookSDK.framework */; };
 		76ADD83F1A2C942700AA84F4 /* CommentsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ADD83E1A2C942700AA84F4 /* CommentsTableViewCell.m */; };
 		76AE95B21A290B7200FFC83C /* ProblemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AE95B11A290B7200FFC83C /* ProblemTableViewCell.m */; };
+		76BE89D61A7E4A7A00545A0C /* StatisticsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BE89D51A7E4A7A00545A0C /* StatisticsTableViewCell.m */; };
 		76C09D7F1A37CE2D000CF50B /* NewProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C09D7E1A37CE2D000CF50B /* NewProblemViewController.m */; };
 		76C24E901A2896B200F44084 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C24E8F1A2896B200F44084 /* ParseFacebookUtils.framework */; };
 		76C24E921A2896CB00F44084 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C24E911A2896CB00F44084 /* ParseUI.framework */; };
@@ -96,6 +97,8 @@
 		76ADD83E1A2C942700AA84F4 /* CommentsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsTableViewCell.m; sourceTree = "<group>"; };
 		76AE95B01A290B7200FFC83C /* ProblemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProblemTableViewCell.h; sourceTree = "<group>"; };
 		76AE95B11A290B7200FFC83C /* ProblemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProblemTableViewCell.m; sourceTree = "<group>"; };
+		76BE89D41A7E4A7A00545A0C /* StatisticsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsTableViewCell.h; sourceTree = "<group>"; };
+		76BE89D51A7E4A7A00545A0C /* StatisticsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsTableViewCell.m; sourceTree = "<group>"; };
 		76C09D7D1A37CE2D000CF50B /* NewProblemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewProblemViewController.h; sourceTree = "<group>"; };
 		76C09D7E1A37CE2D000CF50B /* NewProblemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewProblemViewController.m; sourceTree = "<group>"; };
 		76C24E8F1A2896B200F44084 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
@@ -247,6 +250,8 @@
 		76ADD8431A2C95F500AA84F4 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				76BE89D41A7E4A7A00545A0C /* StatisticsTableViewCell.h */,
+				76BE89D51A7E4A7A00545A0C /* StatisticsTableViewCell.m */,
 				7608E70E1A20BF180088E274 /* StatisticsViewController.h */,
 				7608E70F1A20BF180088E274 /* StatisticsViewController.m */,
 			);
@@ -304,12 +309,12 @@
 		76E4A5851A0FAB7800841FCF /* test */ = {
 			isa = PBXGroup;
 			children = (
+				76ADD8421A2C95D700AA84F4 /* UserActivity */,
 				76A90BE31A4304F300CCED17 /* Quick */,
 				769DEFF71A42D86C003A07B0 /* Profile */,
 				76C09D7C1A37CE0D000CF50B /* NewProblem */,
 				76D21BA11A2F52340042880F /* DetailedProblem */,
 				76ADD8431A2C95F500AA84F4 /* Statistics */,
-				76ADD8421A2C95D700AA84F4 /* UserActivity */,
 				76ADD8411A2C95C000AA84F4 /* Comments */,
 				76AA412E1A37B6AD00F91457 /* InitialFeedTable */,
 				76ADD8401A2C959700AA84F4 /* FeedTable */,
@@ -460,6 +465,7 @@
 				76AA41311A37B6CE00F91457 /* InitialFeedTableViewController.m in Sources */,
 				76D21BA41A2F525A0042880F /* DetailedProblemViewController.m in Sources */,
 				7608E70D1A20BE9C0088E274 /* UserActivityViewController.m in Sources */,
+				76BE89D61A7E4A7A00545A0C /* StatisticsTableViewCell.m in Sources */,
 				76E4A58F1A0FAB7800841FCF /* ViewController.m in Sources */,
 				76E4A58C1A0FAB7800841FCF /* AppDelegate.m in Sources */,
 				76AA41341A37B9C600F91457 /* InitialProblemTableViewCell.m in Sources */,
