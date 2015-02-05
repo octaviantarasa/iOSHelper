@@ -33,6 +33,8 @@
 		76AC45081A14CC4A006A853A /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76AC45071A14CC4A006A853A /* FacebookSDK.framework */; };
 		76ADD83F1A2C942700AA84F4 /* CommentsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ADD83E1A2C942700AA84F4 /* CommentsTableViewCell.m */; };
 		76AE95B21A290B7200FFC83C /* ProblemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AE95B11A290B7200FFC83C /* ProblemTableViewCell.m */; };
+		76B2BB361A841F6E00853B20 /* ModalImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B2BB351A841F6E00853B20 /* ModalImageViewController.m */; };
+		76B2BB381A84218000853B20 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76B2BB371A84218000853B20 /* Main.storyboard */; };
 		76BE89D61A7E4A7A00545A0C /* StatisticsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BE89D51A7E4A7A00545A0C /* StatisticsTableViewCell.m */; };
 		76C09D7F1A37CE2D000CF50B /* NewProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C09D7E1A37CE2D000CF50B /* NewProblemViewController.m */; };
 		76C24E901A2896B200F44084 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76C24E8F1A2896B200F44084 /* ParseFacebookUtils.framework */; };
@@ -49,7 +51,6 @@
 		76E4A5941A0FAB7800841FCF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76E4A5931A0FAB7800841FCF /* Images.xcassets */; };
 		76E4A5971A0FAB7800841FCF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E4A5951A0FAB7800841FCF /* LaunchScreen.xib */; };
 		76E4A5A31A0FAB7800841FCF /* testTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E4A5A21A0FAB7800841FCF /* testTests.m */; };
-		76EE2F861A1F8D1800ED1BB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76EE2F851A1F8D1700ED1BB4 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,9 @@
 		76ADD83E1A2C942700AA84F4 /* CommentsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsTableViewCell.m; sourceTree = "<group>"; };
 		76AE95B01A290B7200FFC83C /* ProblemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProblemTableViewCell.h; sourceTree = "<group>"; };
 		76AE95B11A290B7200FFC83C /* ProblemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProblemTableViewCell.m; sourceTree = "<group>"; };
+		76B2BB341A841F6E00853B20 /* ModalImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalImageViewController.h; sourceTree = "<group>"; };
+		76B2BB351A841F6E00853B20 /* ModalImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalImageViewController.m; sourceTree = "<group>"; };
+		76B2BB371A84218000853B20 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		76BE89D41A7E4A7A00545A0C /* StatisticsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsTableViewCell.h; sourceTree = "<group>"; };
 		76BE89D51A7E4A7A00545A0C /* StatisticsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsTableViewCell.m; sourceTree = "<group>"; };
 		76C09D7D1A37CE2D000CF50B /* NewProblemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewProblemViewController.h; sourceTree = "<group>"; };
@@ -126,7 +130,6 @@
 		76E4A59C1A0FAB7800841FCF /* testTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76E4A5A11A0FAB7800841FCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76E4A5A21A0FAB7800841FCF /* testTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testTests.m; sourceTree = "<group>"; };
-		76EE2F851A1F8D1700ED1BB4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,6 +264,15 @@
 			name = Statistics;
 			sourceTree = "<group>";
 		};
+		76B2BB331A841F3B00853B20 /* ModalImage */ = {
+			isa = PBXGroup;
+			children = (
+				76B2BB341A841F6E00853B20 /* ModalImageViewController.h */,
+				76B2BB351A841F6E00853B20 /* ModalImageViewController.m */,
+			);
+			name = ModalImage;
+			sourceTree = "<group>";
+		};
 		76C09D7C1A37CE0D000CF50B /* NewProblem */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,6 +324,7 @@
 		76E4A5851A0FAB7800841FCF /* test */ = {
 			isa = PBXGroup;
 			children = (
+				76B2BB331A841F3B00853B20 /* ModalImage */,
 				76ADD8421A2C95D700AA84F4 /* UserActivity */,
 				76A90BE31A4304F300CCED17 /* Quick */,
 				769DEFF71A42D86C003A07B0 /* Profile */,
@@ -328,7 +341,7 @@
 				76E4A58E1A0FAB7800841FCF /* ViewController.m */,
 				76E4A5931A0FAB7800841FCF /* Images.xcassets */,
 				76E4A5951A0FAB7800841FCF /* LaunchScreen.xib */,
-				76EE2F851A1F8D1700ED1BB4 /* Main.storyboard */,
+				76B2BB371A84218000853B20 /* Main.storyboard */,
 				76E4A5861A0FAB7800841FCF /* Supporting Files */,
 				7623737B1A841231004ABE37 /* LocationManagerSingleton.h */,
 				7623737C1A841231004ABE37 /* LocationManagerSingleton.m */,
@@ -443,10 +456,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76B2BB381A84218000853B20 /* Main.storyboard in Resources */,
 				76C24E991A289A9900F44084 /* login-button-small-pressed@2x.png in Resources */,
 				76E4A5971A0FAB7800841FCF /* LaunchScreen.xib in Resources */,
 				76E4A5941A0FAB7800841FCF /* Images.xcassets in Resources */,
-				76EE2F861A1F8D1800ED1BB4 /* Main.storyboard in Resources */,
 				76C24E981A289A9900F44084 /* login-button-small-pressed.png in Resources */,
 				76C24E9B1A289A9900F44084 /* login-button-small@2x.png in Resources */,
 				76C24E9A1A289A9900F44084 /* login-button-small.png in Resources */,
@@ -472,6 +485,7 @@
 				7608E70D1A20BE9C0088E274 /* UserActivityViewController.m in Sources */,
 				76BE89D61A7E4A7A00545A0C /* StatisticsTableViewCell.m in Sources */,
 				76E4A58F1A0FAB7800841FCF /* ViewController.m in Sources */,
+				76B2BB361A841F6E00853B20 /* ModalImageViewController.m in Sources */,
 				76E4A58C1A0FAB7800841FCF /* AppDelegate.m in Sources */,
 				76AA41341A37B9C600F91457 /* InitialProblemTableViewCell.m in Sources */,
 				7608E7101A20BF180088E274 /* StatisticsViewController.m in Sources */,

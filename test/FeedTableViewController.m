@@ -16,6 +16,8 @@
 #import "NewProblemViewController.h"
 #import "QuickViewController.h"
 #import "InitialFeedTableViewController.h"
+#import "AppDelegate.h"
+#import "ModalImageViewController.h"
 #import <Parse/Parse.h>
 
 @interface FeedTableViewController ()
@@ -40,7 +42,8 @@
     [self.myTableView addSubview:refresh];
     self.refreshControl = refresh;
    
-    NSLog(@"%@",[LocationManagerSingleton sharedSingleton].locationManager.location);
+//    NSLog(@"%@",[LocationManagerSingleton sharedSingleton].locationManager.location);
+
 }
 
 
@@ -229,6 +232,12 @@
 //        app.window.rootViewController = initial;
         app.myViewController = initial;
         
+    }
+    else if([[segue identifier] isEqualToString:@"showImage"])
+    {
+        ModalImageViewController *modal = [segue destinationViewController];
+        ProblemTableViewCell *clickedCell = (ProblemTableViewCell *) [[sender superview] superview];
+        modal.image.image = clickedCell.imageView.image;
     }
     
 }

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "FeedTableViewController.h"
+#import "LocationManagerSingleton.h"
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 @interface AppDelegate ()
@@ -38,13 +39,7 @@
     self.window.rootViewController = self.myViewController;
     [self.window makeKeyAndVisible];
   
-    if([FBSession activeSession].isOpen){
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            
-          
-        });
-    }
+
     
 //    
 //    NSLog(@"this shit = %d", [FBSession activeSession].isOpen);

@@ -334,7 +334,7 @@
                                                         <action selector="showProblem:" destination="r2Z-ma-4M2" eventType="touchUpInside" id="UIc-di-mBn"/>
                                                     </connections>
                                                 </button>
-                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WbQ-0d-N20">
+                                                <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WbQ-0d-N20">
                                                     <rect key="frame" x="16" y="22" width="55" height="53"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -378,7 +378,6 @@
                         <segue destination="DLl-4e-dr5" kind="push" identifier="showComments" id="Gew-Cm-GfC"/>
                         <segue destination="Au9-qS-WON" kind="push" identifier="showProblem" id="pfp-yp-8sB"/>
                         <segue destination="1JR-ru-0ZN" kind="push" identifier="showNewProblem" id="rKZ-ID-khw"/>
-                        <segue destination="PoK-li-n8t" kind="modal" id="qqx-FE-dyK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yfE-w6-zSF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -529,10 +528,10 @@
             </objects>
             <point key="canvasLocation" x="226" y="2476"/>
         </scene>
-        <!--View Controller-->
+        <!--Modal Image View Controller-->
         <scene sceneID="Oth-D3-Ee5">
             <objects>
-                <viewController id="PoK-li-n8t" sceneMemberID="viewController">
+                <viewController id="PoK-li-n8t" customClass="ModalImageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="quX-C7-Rqu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -544,10 +543,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="image" destination="emq-JO-WoD" id="t39-RC-8Fn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jT8-e1-p9X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="670" y="2469"/>
+            <point key="canvasLocation" x="652" y="2378"/>
         </scene>
         <!--Detailed Problem-->
         <scene sceneID="XFV-yv-WaZ">
