@@ -22,6 +22,7 @@
 
 //@property (weak,nonatomic) id <CommentsViewControllerDelegate> delegate;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *containerScrollView;
 
 - (IBAction)commentButton:(id)sender;
 

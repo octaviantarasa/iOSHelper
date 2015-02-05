@@ -12,6 +12,10 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 
 @interface CommentsViewController ()
+{
+    UIView *activeView;
+    CGPoint lastContentOffset;
+}
 
 @end
 
@@ -20,6 +24,7 @@
 @synthesize myCommentsTableView;
 @synthesize problemId,currentUser;
 @synthesize commentTextField,commentButton, localCommentId;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -30,13 +35,12 @@
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    }
+    [self registerForKeyboardNotifications];
+}
 
 - (void)viewWillDisappear:(BOOL)animated {
     
-    
-    
+    [self deregisterFromKeyboardNotifications];
     [super viewWillDisappear:animated];
     
 }
@@ -113,8 +117,8 @@
                     PFQuery *User = [PFQuery queryWithClassName:@"_User"];
                     
                     [User whereKey :@"objectId" equalTo:[object objectForKey:@"user_id"]];
-                    [User getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-                        [object setObject:[object objectForKey:@"name"] forKey:@"userName"];
+                    [User getFirstObjectInBackgroundWithBlock:^(PFObject *objectRetrived, NSError *error) {
+                        [object setObject:[objectRetrived objectForKey:@"name"] forKey:@"userName"];
                         @synchronized(lock)
                         {
                             numberOfThreads--;
@@ -180,7 +184,11 @@
     }
 }
 
-
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    activeView = textField;
+    return YES;
+}
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -189,13 +197,13 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [self animateTextField: textField up: YES];
+    //[self animateTextField: textField up: YES];
 }
 
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    [self animateTextField: textField up: NO];
+    //[self animateTextField: textField up: NO];
 }
 
 - (void) animateTextField: (UITextField*) textField up: (BOOL) up
@@ -220,5 +228,53 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark Keyboard Methods for fixing textfields that are under the keyboard
+- (void)registerForKeyboardNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+
+
+- (void)deregisterFromKeyboardNotifications {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardDidHideNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+}
+- (void)keyboardWasShown:(NSNotification *)notification {
+    NSDictionary* info = [notification userInfo];
+    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    CGPoint buttonOrigin = activeView.superview.superview.frame.origin;
+    CGFloat buttonHeight = activeView.superview.superview.frame.size.height;
+    CGRect visibleRect = self.view.frame;
+    visibleRect.origin.y = 0;
+    visibleRect.size.height -= keyboardSize.height;
+    
+    CGPoint buttonEndOrigin = buttonOrigin;
+    buttonEndOrigin.y += buttonHeight;
+    
+    if (!CGRectContainsPoint(visibleRect, buttonEndOrigin))
+    {
+        lastContentOffset = self.containerScrollView.contentOffset;
+        CGPoint scrollPoint = CGPointMake(0.0, buttonOrigin.y - visibleRect.size.height + buttonHeight - self.tabBarController.tabBar.frame.size.height);
+        [self.containerScrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+- (void)keyboardWillBeHidden:(NSNotification *)notification {
+    [self.containerScrollView setContentOffset:lastContentOffset animated:YES];
+}
 
 @end

@@ -203,14 +203,16 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.myTableView];
+    NSIndexPath *indexPath = [self.myTableView indexPathForRowAtPoint:buttonPosition];
     if ([[segue identifier] isEqualToString:@"showComments"]) {
         CommentsViewController* commentsViewController = [segue destinationViewController];
-        ProblemTableViewCell *clickedCell = (ProblemTableViewCell *)[[sender superview] superview];
-        commentsViewController.problemId =clickedCell.problemId;
+        ProblemTableViewCell *clickedCell = (ProblemTableViewCell *)[self.myTableView cellForRowAtIndexPath: indexPath];
+        commentsViewController.problemId = clickedCell.problemId;
     }
     else if ([[segue identifier] isEqualToString:@"showProblem"]){
         DetailedProblemViewController *detailed = [segue destinationViewController];
-        ProblemTableViewCell *clickedCell = (ProblemTableViewCell *)[[sender superview] superview];
+        ProblemTableViewCell *clickedCell = (ProblemTableViewCell *)[self.myTableView cellForRowAtIndexPath: indexPath];
         detailed.problemId =clickedCell.problemId;
     }
     else if ([[segue identifier] isEqualToString:@"showNewProblem"]){
@@ -219,7 +221,7 @@
     }
     else if ([[segue identifier] isEqualToString:@"quickHelp"]){
         QuickViewController *quick = [segue destinationViewController];
-        ProblemTableViewCell *clickedCell = (ProblemTableViewCell *) [[sender superview] superview];
+        ProblemTableViewCell *clickedCell = (ProblemTableViewCell *)[self.myTableView cellForRowAtIndexPath: indexPath];
         quick.problemId = clickedCell.problemId;
         quick.userId = clickedCell.userId;
     }
