@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Nag-1m-pPU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="OWv-yW-ZEZ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -74,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tkv-FB-cEr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1249" y="425"/>
+            <point key="canvasLocation" x="1781" y="425"/>
         </scene>
         <!--Statistics-->
         <scene sceneID="UUX-or-Kr5">
@@ -117,7 +117,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uwu-4f-I1s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1238" y="-208"/>
+            <point key="canvasLocation" x="1770" y="-208"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="WFb-FQ-dlb">
@@ -138,7 +138,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5pT-KV-i2V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="280.5333333333333" y="111.70666666666665"/>
+            <point key="canvasLocation" x="812" y="111"/>
         </scene>
         <!--Profile-->
         <scene sceneID="rUc-c1-tfJ">
@@ -349,7 +349,7 @@
                                 </state>
                                 <connections>
                                     <action selector="logOutButtonTouchHandler:" destination="r2Z-ma-4M2" eventType="touchUpInside" id="kyy-Qn-W9C"/>
-                                    <segue destination="Nag-1m-pPU" kind="custom" identifier="logOutSegue" id="tFO-18-9If"/>
+                                    <segue destination="OWv-yW-ZEZ" kind="custom" identifier="logOutSegue" id="tFO-18-9If"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -366,7 +366,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yfE-w6-zSF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="371" y="1743"/>
+            <point key="canvasLocation" x="359" y="1711"/>
         </scene>
         <!--Comments View Controller-->
         <scene sceneID="OQK-kP-GAe">
@@ -722,7 +722,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E18-hs-NTL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="306" y="1027"/>
+            <point key="canvasLocation" x="417" y="986"/>
         </scene>
         <!--User Activity-->
         <scene sceneID="Wk0-VB-aMU">
@@ -741,7 +741,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9UD-7D-XkA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="717" y="425"/>
+            <point key="canvasLocation" x="1249" y="425"/>
         </scene>
         <!--Statistics-->
         <scene sceneID="20Q-OE-oj8">
@@ -760,7 +760,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vQG-Jg-RPh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="706" y="-208"/>
+            <point key="canvasLocation" x="1238" y="-208"/>
         </scene>
         <!--Profile-->
         <scene sceneID="r7M-kV-Boa">
@@ -786,11 +786,23 @@
             <objects>
                 <viewController title="Initial Feed Table" id="Nag-1m-pPU" customClass="InitialFeedTableViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1k9-Db-Hs4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gzc-Jh-Yfp">
+                                <rect key="frame" x="85" y="461" width="151" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
+                                <state key="normal" title="Log In         " backgroundImage="login-button-small.png">
+                                    <color key="titleColor" red="0.9905782004" green="0.97663559690000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginButtonTouchHandler:" destination="Nag-1m-pPU" eventType="touchUpInside" id="z9c-or-OAJ"/>
+                                </connections>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" sectionHeaderHeight="22" sectionFooterHeight="22" id="jx2-ll-sTA">
-                                <rect key="frame" x="0.0" y="68" width="320" height="389"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="461"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -799,19 +811,12 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gUj-Zh-KSU" id="XuJ-XB-PZQ">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="nut-hU-UQx">
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="nut-hU-UQx" customClass="PFImageView">
                                                     <rect key="frame" x="17" y="22" width="55" height="53"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PqD-3m-XH0">
-                                                    <rect key="frame" x="100" y="22" width="139" height="24"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fSu-2f-dLH">
-                                                    <rect key="frame" x="186" y="68" width="154" height="27"/>
+                                                    <rect key="frame" x="100" y="22" width="212" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -824,12 +829,19 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fSu-2f-dLH">
+                                                    <rect key="frame" x="183" y="68" width="129" height="27"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="problemComment" destination="fSu-2f-dLH" id="Zgd-gw-L1P"/>
                                             <outlet property="problemHour" destination="xA6-py-0lY" id="9XW-c7-RTK"/>
-                                            <outlet property="problemImage" destination="nut-hU-UQx" id="hT3-fT-HGS"/>
+                                            <outlet property="problemImage" destination="nut-hU-UQx" id="DDn-0T-zK1"/>
                                             <outlet property="problemTitle" destination="PqD-3m-XH0" id="nD9-2L-SdS"/>
                                         </connections>
                                     </tableViewCell>
@@ -839,28 +851,35 @@
                                     <outlet property="delegate" destination="Nag-1m-pPU" id="ZZm-1w-I8N"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gzc-Jh-Yfp">
-                                <rect key="frame" x="85" y="465" width="151" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
-                                <state key="normal" title="Log In         " backgroundImage="login-button-small.png">
-                                    <color key="titleColor" red="0.9905782004" green="0.97663559690000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="loginButtonTouchHandler:" destination="Nag-1m-pPU" eventType="touchUpInside" id="z9c-or-OAJ"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="LxP-BO-iEG"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" title="Whatever" id="LxP-BO-iEG"/>
                     <connections>
                         <outlet property="myTableView" destination="jx2-ll-sTA" id="01S-m7-3z2"/>
                         <segue destination="raG-D0-8qe" kind="modal" identifier="ToDetailedFeed" modalTransitionStyle="flipHorizontal" id="FFr-dN-beh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JSA-jB-NnV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="323" y="111"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="94d-8L-i4G">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OWv-yW-ZEZ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6ak-JJ-Dmz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Nag-1m-pPU" kind="relationship" relationship="rootViewController" id="UTY-Z1-dUI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Vi-8l-Yr2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-215" y="105"/>
         </scene>

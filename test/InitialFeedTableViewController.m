@@ -12,6 +12,7 @@
 #import "CommentsViewController.h"
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
 @interface InitialFeedTableViewController ()
 
 @end
@@ -47,7 +48,7 @@
 }
 
 - (void) getDataFromParse{
-    
+
     
     PFQuery *query = [PFQuery queryWithClassName:@"Problems"];
     
@@ -62,6 +63,17 @@
         else {
             self.problemsArray =  [objects mutableCopy];
 //            [self getNearestLocation];
+            for (PFObject *object in self.problemsArray)
+            {
+                 PFQuery *numberOfComments = [PFQuery queryWithClassName:@"Comments"];
+                 [numberOfComments whereKey :@"problem_id" equalTo:[object objectId]];
+                 //[cell.problemComment setText:[[NSString alloc] initWithFormat:@"%ld Comments ",(long)[numberOfComments countObjects]]] ;
+                [numberOfComments findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+                {
+                    [object setObject: [NSString stringWithFormat:@"%lu", (unsigned long)[objects count] ] forKey:@"commentsCount"];
+                }];
+            }
+            
             [self.myTableView reloadData];
             
         }
@@ -119,6 +131,10 @@
     static NSString *CellIdentifier = @"Cell";
     InitialProblemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
+    cell.problemComment.text = nil;
+    cell.problemHour.text = nil;
+    cell.problemTitle.text = nil;
+    
     PFObject *problem = [self.problemsArray objectAtIndex:indexPath.row];
     
     [cell.problemTitle setText:[problem objectForKey:@"title"]];
@@ -127,38 +143,23 @@
     [formatter setDateFormat:@"M/d H:m"];
     NSString *stringFromDate = [formatter stringFromDate:[problem objectForKey:@"date"]];
     cell.problemHour.text = stringFromDate;
-    
+    /*
     PFQuery *numberOfComments = [PFQuery queryWithClassName:@"Comments"];
     [numberOfComments whereKey :@"problem_id" equalTo:[problem objectId]];
     [cell.problemComment setText:[[NSString alloc] initWithFormat:@"%ld Comments ",(long)[numberOfComments countObjects]]] ;
+    */
     
+    if ([[self.problemsArray objectAtIndex: indexPath.row] objectForKey:@"commentsCount"]) {
+        [cell.problemComment setText:[[NSString alloc] initWithFormat:@"%@ Comments ",[[self.problemsArray objectAtIndex: indexPath.row] objectForKey:@"commentsCount"]]] ;
+    }
     
+    cell.problemImage.image = nil;
     
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        
-        PFFile *imageFile = [problem objectForKey:@"picture"];
-        
-        [imageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
-            if (!error) {
-                if (imageData != nil) {
-                    // Set the images using the main thread to avoid non-appearing images, due to the UI not updating
-                    // (The UI always runs on the main thread)
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        //  Set the image in the cell
-                        cell.problemImage.image = [UIImage imageWithData:imageData];
-                        [cell setNeedsLayout];
-                    });
-                }
-                
-            }
-        }];
-        
-        // Add a check to add a default image if there is not parse image available
-    });
-    
-    
-    
+    if ([problem objectForKey:@"picture"])
+    {
+        cell.problemImage.file = [problem objectForKey:@"picture"];
+        [cell.problemImage loadInBackground];
+    }
     return cell;
     
 }

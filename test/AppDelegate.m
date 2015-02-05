@@ -10,6 +10,7 @@
 #import "FeedTableViewController.h"
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <ParseUI/ParseUI.h>
 @interface AppDelegate ()
 
 @end
@@ -53,6 +54,8 @@
     
 //    
 //    NSLog(@"this shit = %d", [FBSession activeSession].isOpen);
+    [PFImageView class];
+    
     return YES;
 }
 
