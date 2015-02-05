@@ -7,6 +7,7 @@
 //
 
 #import "FeedTableViewController.h"
+#import "LocationManagerSingleton.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "ProblemTableViewCell.h"
@@ -16,7 +17,7 @@
 #import "QuickViewController.h"
 #import "InitialFeedTableViewController.h"
 #import <Parse/Parse.h>
-#import "AppDelegate.h"
+
 @interface FeedTableViewController ()
 
 @end
@@ -39,7 +40,7 @@
     [self.myTableView addSubview:refresh];
     self.refreshControl = refresh;
    
-    
+    NSLog(@"%@",[LocationManagerSingleton sharedSingleton].locationManager.location);
 }
 
 
@@ -247,7 +248,7 @@
         point = [problem objectForKey:@"location"];
         user = [problem objectForKey:@"user_id"];
         CLLocation *locPoint = [[CLLocation alloc] initWithLatitude:point.latitude longitude:point.longitude];
-        CLLocation *locUser  = [[CLLocation alloc] initWithLatitude:[locationManager.location coordinate].latitude longitude:[locationManager.location coordinate].longitude];
+        CLLocation *locUser  = [[CLLocation alloc] initWithLatitude:[[LocationManagerSingleton sharedSingleton].locationManager.location coordinate].latitude longitude:[[LocationManagerSingleton sharedSingleton].locationManager.location coordinate].longitude];
         
         CLLocationDistance dist = [locPoint distanceFromLocation:locUser ];
         BOOL b = [user isEqualToString:[PFUser currentUser].objectId];

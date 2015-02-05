@@ -10,6 +10,7 @@
 		7608E70D1A20BE9C0088E274 /* UserActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7608E70C1A20BE9C0088E274 /* UserActivityViewController.m */; };
 		7608E7101A20BF180088E274 /* StatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7608E70F1A20BF180088E274 /* StatisticsViewController.m */; };
 		7608E7131A20BF270088E274 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7608E7121A20BF270088E274 /* ProfileViewController.m */; };
+		7623737D1A841231004ABE37 /* LocationManagerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7623737C1A841231004ABE37 /* LocationManagerSingleton.m */; };
 		763EBD061A40731900DB6F94 /* UserActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 763EBD051A40731900DB6F94 /* UserActivityTableViewCell.m */; };
 		7655A76C1A2BD9EE00807363 /* CommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7655A76B1A2BD9EE00807363 /* CommentsViewController.m */; };
 		76A90BE21A4304DD00CCED17 /* QuickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A90BE11A4304DD00CCED17 /* QuickViewController.m */; };
@@ -68,6 +69,8 @@
 		7608E70F1A20BF180088E274 /* StatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsViewController.m; sourceTree = "<group>"; };
 		7608E7111A20BF270088E274 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		7608E7121A20BF270088E274 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		7623737B1A841231004ABE37 /* LocationManagerSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManagerSingleton.h; sourceTree = "<group>"; };
+		7623737C1A841231004ABE37 /* LocationManagerSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManagerSingleton.m; sourceTree = "<group>"; };
 		763EBD041A40731900DB6F94 /* UserActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserActivityTableViewCell.h; sourceTree = "<group>"; };
 		763EBD051A40731900DB6F94 /* UserActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserActivityTableViewCell.m; sourceTree = "<group>"; };
 		7655A76A1A2BD9EE00807363 /* CommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsViewController.h; sourceTree = "<group>"; };
@@ -327,6 +330,8 @@
 				76E4A5951A0FAB7800841FCF /* LaunchScreen.xib */,
 				76EE2F851A1F8D1700ED1BB4 /* Main.storyboard */,
 				76E4A5861A0FAB7800841FCF /* Supporting Files */,
+				7623737B1A841231004ABE37 /* LocationManagerSingleton.h */,
+				7623737C1A841231004ABE37 /* LocationManagerSingleton.m */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -474,6 +479,7 @@
 				76ADD83F1A2C942700AA84F4 /* CommentsTableViewCell.m in Sources */,
 				76C09D7F1A37CE2D000CF50B /* NewProblemViewController.m in Sources */,
 				763EBD061A40731900DB6F94 /* UserActivityTableViewCell.m in Sources */,
+				7623737D1A841231004ABE37 /* LocationManagerSingleton.m in Sources */,
 				7655A76C1A2BD9EE00807363 /* CommentsViewController.m in Sources */,
 				76A90BE21A4304DD00CCED17 /* QuickViewController.m in Sources */,
 				76AE95B21A290B7200FFC83C /* ProblemTableViewCell.m in Sources */,

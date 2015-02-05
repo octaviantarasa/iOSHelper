@@ -7,7 +7,7 @@
 //
 
 #import "NewProblemViewController.h"
-#import "AppDelegate.h"
+#import "LocationManagerSingleton.h"
 
 #import <Parse/Parse.h>
 @interface NewProblemViewController ()
@@ -30,14 +30,10 @@
 }
 
 - (IBAction)createNewProblem:(id)sender{
-    AppDelegate *appD = (AppDelegate *) [[UIApplication sharedApplication] delegate];
 
-    [appD.locationManager stopUpdatingLocation];
-    appD.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [appD.locationManager startUpdatingLocation];
     
     NSLog(@"severity === = %@",[problemSeverity titleForSegmentAtIndex:problemSeverity.selectedSegmentIndex]);
-    
+    [[LocationManagerSingleton sharedSingleton].locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     if (![problemTitle.text isEqualToString:@""]) {
         if (![problemDescription.text isEqualToString:@""]) {
             if (!problemSeverity.selected) {
@@ -50,7 +46,7 @@
                             problem[@"title"] = problemTitle.text;
                             problem[@"text"] = problemDescription.text;
                             problem[@"severity"] = [problemSeverity titleForSegmentAtIndex:problemSeverity.selectedSegmentIndex];
-                            PFGeoPoint *loc = [PFGeoPoint geoPointWithLocation:appD.locationManager.location];
+                            PFGeoPoint *loc = [PFGeoPoint geoPointWithLocation:[LocationManagerSingleton sharedSingleton].locationManager.location];
                             problem[@"location"] = loc;
                             problem[@"user_id"] = [PFUser currentUser].objectId;
                             problem[@"date"] = [NSDate date];
@@ -86,7 +82,7 @@
     } else {
         
     }
-    [appD.locationManager stopUpdatingLocation];
+    [[LocationManagerSingleton sharedSingleton].locationManager setDesiredAccuracy:kCLLocationAccuracyKilometer];
 }
 
 

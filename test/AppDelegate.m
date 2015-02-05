@@ -19,7 +19,7 @@
 }
 @synthesize window;
 @synthesize Main;
-@synthesize locationManager;
+
 
 @synthesize myViewController;
 
@@ -31,17 +31,6 @@
     [PFFacebookUtils initializeFacebook];
     
     
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    
-//    self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
-    
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
-    }
-//    self.locationManager.distanceFilter = 1;
-//    [self.locationManager startUpdatingLocation];
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds] ];
     Main = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     self.myViewController = [Main instantiateInitialViewController];
@@ -49,7 +38,13 @@
     self.window.rootViewController = self.myViewController;
     [self.window makeKeyAndVisible];
   
-
+    if([FBSession activeSession].isOpen){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            
+          
+        });
+    }
     
 //    
 //    NSLog(@"this shit = %d", [FBSession activeSession].isOpen);
