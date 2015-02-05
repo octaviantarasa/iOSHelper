@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <ParseUI/ParseUI.h>
 @interface ProblemTableViewCell : UITableViewCell 
-@property (weak, nonatomic) IBOutlet UIImageView *problemImage;
+@property (weak, nonatomic) IBOutlet PFImageView *problemImage;
 @property (weak, nonatomic) IBOutlet UIButton *problemTitle;
 @property (weak, nonatomic) IBOutlet UILabel *problemText;
 @property (weak, nonatomic) IBOutlet UIButton *problemComment;

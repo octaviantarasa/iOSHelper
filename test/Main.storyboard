@@ -9,11 +9,11 @@
             <objects>
                 <viewController title="User activity" id="weL-Da-QY9" customClass="UserActivityViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o6a-3R-yek">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="9Kw-PB-wNP">
-                                <rect key="frame" x="0.0" y="46" width="320" height="475"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -67,6 +67,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="P60-GL-N0g"/>
                     <connections>
                         <outlet property="myActivityTableView" destination="9Kw-PB-wNP" id="RJz-me-vbg"/>
@@ -249,21 +250,11 @@
             <objects>
                 <viewController id="r2Z-ma-4M2" customClass="FeedTableViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rvi-fa-a9S">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tHu-c5-Ixt">
-                                <rect key="frame" x="197" y="476" width="107" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="New Problem">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="newProblem:" destination="r2Z-ma-4M2" eventType="touchUpInside" id="ytK-ED-nQf"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" sectionHeaderHeight="22" sectionFooterHeight="22" id="Dw3-Tu-Yv2">
-                                <rect key="frame" x="0.0" y="68" width="320" height="389"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="401"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -318,7 +309,7 @@
                                                         <action selector="showProblem:" destination="r2Z-ma-4M2" eventType="touchUpInside" id="UIc-di-mBn"/>
                                                     </connections>
                                                 </button>
-                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WbQ-0d-N20">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WbQ-0d-N20" customClass="PFImageView">
                                                     <rect key="frame" x="16" y="22" width="55" height="53"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -327,7 +318,7 @@
                                         <connections>
                                             <outlet property="problemComment" destination="VM1-pc-Ugn" id="pnN-Z7-ay8"/>
                                             <outlet property="problemHour" destination="J0s-CP-Qwl" id="FlU-XL-vuf"/>
-                                            <outlet property="problemImage" destination="WbQ-0d-N20" id="CXv-Ys-cXD"/>
+                                            <outlet property="problemImage" destination="WbQ-0d-N20" id="v2q-CQ-xXg"/>
                                             <outlet property="problemText" destination="3Ih-b0-3h6" id="BqI-Ox-YQN"/>
                                             <outlet property="problemTitle" destination="IDx-Wj-r33" id="Jox-i7-6re"/>
                                             <outlet property="quickButton" destination="O35-hU-s5M" id="A9z-Lh-u4s"/>
@@ -339,22 +330,40 @@
                                     <outlet property="delegate" destination="r2Z-ma-4M2" id="m4P-LR-cfF"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eeN-bW-GOP">
-                                <rect key="frame" x="5" y="470" width="151" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
-                                <state key="normal" title="Log Out   " backgroundImage="login-button-small.png">
-                                    <color key="titleColor" red="0.9905782004007857" green="0.97663559693912561" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="logOutButtonTouchHandler:" destination="r2Z-ma-4M2" eventType="touchUpInside" id="kyy-Qn-W9C"/>
-                                    <segue destination="OWv-yW-ZEZ" kind="custom" identifier="logOutSegue" id="tFO-18-9If"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" id="p2r-xf-AEg">
+                                <rect key="frame" x="0.0" y="401" width="320" height="54"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eeN-bW-GOP">
+                                        <rect key="frame" x="8" y="5" width="151" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
+                                        <state key="normal" title="Log Out   " backgroundImage="login-button-small.png">
+                                            <color key="titleColor" red="0.9905782004007857" green="0.97663559693912561" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="logOutButtonTouchHandler:" destination="r2Z-ma-4M2" eventType="touchUpInside" id="kyy-Qn-W9C"/>
+                                            <segue destination="OWv-yW-ZEZ" kind="custom" identifier="logOutSegue" id="tFO-18-9If"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tHu-c5-Ixt">
+                                        <rect key="frame" x="205" y="12" width="107" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <state key="normal" title="New Problem">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="newProblem:" destination="r2Z-ma-4M2" eventType="touchUpInside" id="ytK-ED-nQf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="W8a-vn-L6O"/>
                     <connections>
                         <outlet property="FBButton" destination="eeN-bW-GOP" id="551-ZQ-ikg"/>
@@ -789,18 +798,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gzc-Jh-Yfp">
-                                <rect key="frame" x="85" y="461" width="151" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
-                                <state key="normal" title="Log In         " backgroundImage="login-button-small.png">
-                                    <color key="titleColor" red="0.9905782004" green="0.97663559690000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="loginButtonTouchHandler:" destination="Nag-1m-pPU" eventType="touchUpInside" id="z9c-or-OAJ"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" sectionHeaderHeight="22" sectionFooterHeight="22" id="jx2-ll-sTA">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="461"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -811,12 +808,15 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gUj-Zh-KSU" id="XuJ-XB-PZQ">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="nut-hU-UQx" customClass="PFImageView">
-                                                    <rect key="frame" x="17" y="22" width="55" height="53"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PqD-3m-XH0">
                                                     <rect key="frame" x="100" y="22" width="212" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fSu-2f-dLH">
+                                                    <rect key="frame" x="183" y="68" width="129" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -829,13 +829,10 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fSu-2f-dLH">
-                                                    <rect key="frame" x="183" y="68" width="129" height="27"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="nut-hU-UQx" customClass="PFImageView">
+                                                    <rect key="frame" x="17" y="22" width="55" height="53"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -851,11 +848,23 @@
                                     <outlet property="delegate" destination="Nag-1m-pPU" id="ZZm-1w-I8N"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gzc-Jh-Yfp">
+                                <rect key="frame" x="85" y="461" width="151" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
+                                <state key="normal" title="Log In         " backgroundImage="login-button-small.png">
+                                    <color key="titleColor" red="0.9905782004" green="0.97663559690000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginButtonTouchHandler:" destination="Nag-1m-pPU" eventType="touchUpInside" id="z9c-or-OAJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Whatever" id="LxP-BO-iEG"/>
+                    <navigationItem key="navigationItem" title="AutoHelper" id="LxP-BO-iEG"/>
                     <connections>
                         <outlet property="myTableView" destination="jx2-ll-sTA" id="01S-m7-3z2"/>
                         <segue destination="raG-D0-8qe" kind="modal" identifier="ToDetailedFeed" modalTransitionStyle="flipHorizontal" id="FFr-dN-beh"/>

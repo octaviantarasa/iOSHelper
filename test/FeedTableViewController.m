@@ -17,6 +17,7 @@
 #import "InitialFeedTableViewController.h"
 #import <Parse/Parse.h>
 #import "AppDelegate.h"
+#import <ParseUI/ParseUI.h>
 @interface FeedTableViewController ()
 
 @end
@@ -55,38 +56,54 @@
 
 - (void) getDataFromParse{
     
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"Problems"];
-    [query whereKey:@"user_id" equalTo:[PFUser currentUser].objectId];
-    if([problemsArray count]){
-        [problemsArray removeAllObjects];
-    }
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (error) {
-            NSLog(@"Error %@ %@", error, [error userInfo]);
+    dispatch_queue_t downloadQueue1 = dispatch_queue_create("Data Downloader", NULL);
+    dispatch_async(downloadQueue1, ^{
+        PFQuery *query = [PFQuery queryWithClassName:@"Problems"];
+        
+        if([problemsArray count]){
+            [problemsArray removeAllObjects];
         }
-        else {
-            self.problemsArray = [objects mutableCopy];
-            PFQuery *tmpQuery = [PFQuery queryWithClassName:@"Problems"];
-                [tmpQuery whereKey:@"user_id" notEqualTo:[PFUser currentUser].objectId];
-                [tmpQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                    if (error) {
-                        NSLog(@"Error %@ %@", error, [error userInfo]);
-                    }
-                    else {
-                        [self.problemsArray addObjectsFromArray:objects];
-//                        [self getNearestLocation];
-                        [self.myTableView reloadData];
-                       
-                    }
-                }];
-
-
-            
-        }
-    }];
-    
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (error) {
+                NSLog(@"Error %@ %@", error, [error userInfo]);
+            }
+            else {
+                self.problemsArray =  [objects mutableCopy];
+                //            [self getNearestLocation];
+                
+                __block NSNumber *lock = [NSNumber numberWithInt:1];
+                __block int numberOfThreads = (int)(self.problemsArray.count);
+                
+                
+                for (PFObject *object in self.problemsArray)
+                {
+                    PFQuery *numberOfComments = [PFQuery queryWithClassName:@"Comments"];
+                    [numberOfComments whereKey :@"problem_id" equalTo:[object objectId]];
+                    //[cell.problemComment setText:[[NSString alloc] initWithFormat:@"%ld Comments ",(long)[numberOfComments countObjects]]] ;
+                    [numberOfComments findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+                     {
+                         [object setObject: [NSString stringWithFormat:@"%lu", (unsigned long)[objects count] ] forKey:@"commentsCount"];
+                         
+                         @synchronized(lock)
+                         {
+                             numberOfThreads--;
+                             if(numberOfThreads < 1)
+                             {
+                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                     [self.myTableView reloadData];
+                                 });
+                             }
+                         }
+                         
+                     }];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.myTableView reloadData];
+                });
+            }
+        }];
+    });
 }
 
 - (void)getNewData{
@@ -160,9 +177,9 @@
     NSString *stringFromDate = [formatter stringFromDate:[problem objectForKey:@"date"]];
     cell.problemHour.text = stringFromDate;
     
-    PFQuery *numberOfComments = [PFQuery queryWithClassName:@"Comments"];
-    [numberOfComments whereKey :@"problem_id" equalTo:[problem objectId]];
-    [cell.problemComment setTitle:[[NSString alloc] initWithFormat:@"%ld Comments ",(long)[numberOfComments countObjects]] forState:UIControlStateNormal ] ;
+    if ([[self.problemsArray objectAtIndex: indexPath.row] objectForKey:@"commentsCount"]) {
+        [cell.problemComment setTitle:[[NSString alloc] initWithFormat:@"%@ Comments ",[[self.problemsArray objectAtIndex: indexPath.row] objectForKey:@"commentsCount"]] forState:UIControlStateNormal];
+    }
     
     NSString *prbId = problem.objectId;
     cell.problemId = prbId;
@@ -171,33 +188,16 @@
     
     [cell.quickButton setTitle:@"Quick" forState:UIControlStateNormal];
     cell.problemText.text  = [problem objectForKey:@"text"];
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        
-        PFFile *imageFile = [problem objectForKey:@"picture"];
-        
-        [imageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
-            if (!error) {
-                if (imageData != nil) {
-                    // Set the images using the main thread to avoid non-appearing images, due to the UI not updating
-                    // (The UI always runs on the main thread)
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        //  Set the image in the cell
-                        cell.problemImage.image = [UIImage imageWithData:imageData];
-                        [cell setNeedsLayout];
-                    });
-                }
-                
-            }
-        }];
-        
-        // Add a check to add a default image if there is not parse image available
-    });
     
+    cell.problemImage.image = nil;
     
-    
+    if ([problem objectForKey:@"picture"])
+    {
+        cell.problemImage.file = [problem objectForKey:@"picture"];
+        [cell.problemImage loadInBackground];
+    }
+
     return cell;
-    
 }
 
 
