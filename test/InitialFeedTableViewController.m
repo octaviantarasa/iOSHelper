@@ -49,35 +49,56 @@
 
 - (void) getDataFromParse{
 
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"Problems"];
-    
-    if([problemsArray count]){
-        [problemsArray removeAllObjects];
-    }
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (error) {
-            NSLog(@"Error %@ %@", error, [error userInfo]);
+    dispatch_queue_t downloadQueue1 = dispatch_queue_create("Data Downloader", NULL);
+    dispatch_async(downloadQueue1, ^{
+        PFQuery *query = [PFQuery queryWithClassName:@"Problems"];
+        
+        if([problemsArray count]){
+            [problemsArray removeAllObjects];
         }
-        else {
-            self.problemsArray =  [objects mutableCopy];
-//            [self getNearestLocation];
-            for (PFObject *object in self.problemsArray)
-            {
-                 PFQuery *numberOfComments = [PFQuery queryWithClassName:@"Comments"];
-                 [numberOfComments whereKey :@"problem_id" equalTo:[object objectId]];
-                 //[cell.problemComment setText:[[NSString alloc] initWithFormat:@"%ld Comments ",(long)[numberOfComments countObjects]]] ;
-                [numberOfComments findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-                {
-                    [object setObject: [NSString stringWithFormat:@"%lu", (unsigned long)[objects count] ] forKey:@"commentsCount"];
-                }];
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (error) {
+                NSLog(@"Error %@ %@", error, [error userInfo]);
             }
-            
-            [self.myTableView reloadData];
-            
-        }
-    }];
+            else {
+                self.problemsArray =  [objects mutableCopy];
+                //            [self getNearestLocation];
+                
+                __block NSNumber *lock = [NSNumber numberWithInt:1];
+                __block int numberOfThreads = (int)(self.problemsArray.count);
+                
+                
+                for (PFObject *object in self.problemsArray)
+                {
+                    PFQuery *numberOfComments = [PFQuery queryWithClassName:@"Comments"];
+                    [numberOfComments whereKey :@"problem_id" equalTo:[object objectId]];
+                    //[cell.problemComment setText:[[NSString alloc] initWithFormat:@"%ld Comments ",(long)[numberOfComments countObjects]]] ;
+                    [numberOfComments findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+                     {
+                         [object setObject: [NSString stringWithFormat:@"%lu", (unsigned long)[objects count] ] forKey:@"commentsCount"];
+                         
+                         @synchronized(lock)
+                         {
+                             numberOfThreads--;
+                             if(numberOfThreads < 1)
+                             {
+                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                     [self.myTableView reloadData];
+                                 });
+                             }
+                         }
+                         
+                     }];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.myTableView reloadData];
+                });
+                
+                
+            }
+        }];
+    });
 }
 
 - (IBAction)loginButtonTouchHandler:(id)sender  {
