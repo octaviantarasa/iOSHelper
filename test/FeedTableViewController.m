@@ -43,9 +43,7 @@
 }
 
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-    NSLog(@"%@", [locations lastObject]);
-}
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -77,6 +75,7 @@
                     else {
                         [self.problemsArray addObjectsFromArray:objects];
 //                        [self getNearestLocation];
+
                         [self.myTableView reloadData];
                        
                     }
@@ -249,6 +248,7 @@
         user = [problem objectForKey:@"user_id"];
         CLLocation *locPoint = [[CLLocation alloc] initWithLatitude:point.latitude longitude:point.longitude];
         CLLocation *locUser  = [[CLLocation alloc] initWithLatitude:[locationManager.location coordinate].latitude longitude:[locationManager.location coordinate].longitude];
+        
         CLLocationDistance dist = [locPoint distanceFromLocation:locUser ];
         BOOL b = [user isEqualToString:[PFUser currentUser].objectId];
         if (dist > 1000 && !b) {

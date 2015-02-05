@@ -37,18 +37,32 @@
     }
     locationManager.distanceFilter = 1;
     [locationManager startUpdatingLocation];
+    
+
 
     [self getDataFromParse];
 }
 
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    
+            NSLog(@"================%@", [locations lastObject]);
+   
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 - (void) getDataFromParse{
-    
-    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,
+//                                             (unsigned long)NULL), ^(void) {
+//        while (true) {
+//             NSLog(@"---------------%@",locationManager.location);
+//            [locationManager ]
+//        }
+//    });
+   
     PFQuery *query = [PFQuery queryWithClassName:@"Problems"];
     
     if([problemsArray count]){
