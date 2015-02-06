@@ -16,10 +16,14 @@
 #import "NewProblemViewController.h"
 #import "QuickViewController.h"
 #import "InitialFeedTableViewController.h"
-#import <Parse/Parse.h>
 #import "AppDelegate.h"
+<<<<<<< HEAD
 #import <ParseUI/ParseUI.h>
+=======
 #import "ModalImageViewController.h"
+#import <Parse/Parse.h>
+
+>>>>>>> backend
 @interface FeedTableViewController ()
 
 @end
@@ -42,7 +46,8 @@
     [self.myTableView addSubview:refresh];
     self.refreshControl = refresh;
    
-    
+//    NSLog(@"%@",[LocationManagerSingleton sharedSingleton].locationManager.location);
+
 }
 
 
@@ -56,12 +61,45 @@
 
 - (void) getDataFromParse{
     
+<<<<<<< HEAD
     dispatch_queue_t downloadQueue1 = dispatch_queue_create("Data Downloader", NULL);
     dispatch_async(downloadQueue1, ^{
         PFQuery *query = [PFQuery queryWithClassName:@"Problems"];
         
         if([problemsArray count]){
             [problemsArray removeAllObjects];
+=======
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Problems"];
+    [query whereKey:@"user_id" equalTo:[PFUser currentUser].objectId];
+    if([problemsArray count]){
+        [problemsArray removeAllObjects];
+    }
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            NSLog(@"Error %@ %@", error, [error userInfo]);
+        }
+        else {
+            self.problemsArray = [objects mutableCopy];
+            PFQuery *tmpQuery = [PFQuery queryWithClassName:@"Problems"];
+                [tmpQuery whereKey:@"user_id" notEqualTo:[PFUser currentUser].objectId];
+                [tmpQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    if (error) {
+                        NSLog(@"Error %@ %@", error, [error userInfo]);
+                    }
+                    else {
+                        [self.problemsArray addObjectsFromArray:objects];
+//                        [self getNearestLocation];
+
+                        [self.myTableView reloadData];
+                       
+                    }
+                }];
+
+
+            
+>>>>>>> backend
         }
         
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
