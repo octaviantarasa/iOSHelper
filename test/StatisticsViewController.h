@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StatisticsViewController : UIViewController
-
+@interface StatisticsViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
+@property (strong, nonatomic) NSMutableArray *statisticsArrayText;
+@property (strong, nonatomic) NSMutableArray *statisticsArrayCount;
 @end

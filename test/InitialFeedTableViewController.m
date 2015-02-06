@@ -8,6 +8,7 @@
 
 #import "InitialFeedTableViewController.h"
 #import "InitialProblemTableViewCell.h"
+#import "LocationManagerSingleton.h"
 #import "FeedTableViewController.h"
 #import "CommentsViewController.h"
 #import <ParseFacebookUtils/PFFacebookUtils.h>
@@ -26,21 +27,25 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    
-    locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
-    
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
-        [locationManager requestWhenInUseAuthorization];
-        [locationManager requestAlwaysAuthorization];
-        
-    }
-    locationManager.distanceFilter = 1;
-    [locationManager startUpdatingLocation];
+//    locationManager = [[CLLocationManager alloc] init];
+//    locationManager.delegate = self;
+//    
+//    locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+//    
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+//        [locationManager requestWhenInUseAuthorization];
+//        [locationManager requestAlwaysAuthorization];
+//        
+//    }
+//    locationManager.distanceFilter = 1;
+//    [locationManager startUpdatingLocation];
+//    
+
 
     [self getDataFromParse];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -159,7 +164,7 @@
     PFObject *problem = [self.problemsArray objectAtIndex:indexPath.row];
     
     [cell.problemTitle setText:[problem objectForKey:@"title"]];
-    
+
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"M/d H:m"];
     NSString *stringFromDate = [formatter stringFromDate:[problem objectForKey:@"date"]];
@@ -194,7 +199,7 @@
         point = [problem objectForKey:@"location"];
         user = [problem objectForKey:@"user_id"];
         CLLocation *locPoint = [[CLLocation alloc] initWithLatitude:point.latitude longitude:point.longitude];
-        CLLocation *locUser  = [[CLLocation alloc] initWithLatitude:[locationManager.location coordinate].latitude longitude:[locationManager.location coordinate].longitude];
+        CLLocation *locUser  = [[CLLocation alloc] initWithLatitude:[[LocationManagerSingleton sharedSingleton].locationManager.location coordinate].latitude longitude:[[LocationManagerSingleton sharedSingleton].locationManager.location coordinate].longitude];
         CLLocationDistance dist = [locPoint distanceFromLocation:locUser ];
         BOOL b = [user isEqualToString:[PFUser currentUser].objectId];
         if (dist > 1000 && !b) {

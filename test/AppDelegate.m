@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "FeedTableViewController.h"
+#import "LocationManagerSingleton.h"
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <ParseUI/ParseUI.h>
@@ -20,7 +21,7 @@
 }
 @synthesize window;
 @synthesize Main;
-@synthesize locationManager;
+
 
 @synthesize myViewController;
 
@@ -31,17 +32,6 @@
     
     [PFFacebookUtils initializeFacebook];
     
-    
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    
-//    self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
-    
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
-    }
-//    self.locationManager.distanceFilter = 1;
-//    [self.locationManager startUpdatingLocation];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds] ];
     Main = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

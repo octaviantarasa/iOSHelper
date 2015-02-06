@@ -7,6 +7,7 @@
 //
 
 #import "FeedTableViewController.h"
+#import "LocationManagerSingleton.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "ProblemTableViewCell.h"
@@ -44,9 +45,7 @@
 }
 
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-    NSLog(@"%@", [locations lastObject]);
-}
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -232,6 +231,12 @@
         app.myViewController = initial;
         
     }
+    else if([[segue identifier] isEqualToString:@"showImage"])
+    {
+        ModalImageViewController *modal = [segue destinationViewController];
+        ProblemTableViewCell *clickedCell = (ProblemTableViewCell *) [[sender superview] superview];
+        modal.image.image = clickedCell.imageView.image;
+    }
     
 }
 
@@ -250,7 +255,8 @@
         point = [problem objectForKey:@"location"];
         user = [problem objectForKey:@"user_id"];
         CLLocation *locPoint = [[CLLocation alloc] initWithLatitude:point.latitude longitude:point.longitude];
-        CLLocation *locUser  = [[CLLocation alloc] initWithLatitude:[locationManager.location coordinate].latitude longitude:[locationManager.location coordinate].longitude];
+        CLLocation *locUser  = [[CLLocation alloc] initWithLatitude:[[LocationManagerSingleton sharedSingleton].locationManager.location coordinate].latitude longitude:[[LocationManagerSingleton sharedSingleton].locationManager.location coordinate].longitude];
+        
         CLLocationDistance dist = [locPoint distanceFromLocation:locUser ];
         BOOL b = [user isEqualToString:[PFUser currentUser].objectId];
         if (dist > 1000 && !b) {

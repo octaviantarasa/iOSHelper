@@ -13,6 +13,6 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UIViewController *myViewController;
 @property (strong, nonatomic) UIStoryboard *Main;
-@property (strong, nonatomic) CLLocationManager *locationManager;
+
 @end
 
