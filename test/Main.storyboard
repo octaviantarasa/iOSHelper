@@ -239,7 +239,6 @@
                                 <rect key="frame" x="28" y="192" width="69" height="68"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </imageView>
-                           
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Direction" textAlignment="center" minimumFontSize="17" id="wZ6-Xi-3ou">
                                 <rect key="frame" x="112" y="338" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -328,7 +327,7 @@
                                                         <action selector="showProblem:" destination="r2Z-ma-4M2" eventType="touchUpInside" id="UIc-di-mBn"/>
                                                     </connections>
                                                 </button>
-                                                <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WbQ-0d-N20">
+                                                <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WbQ-0d-N20" customClass="PFImageView">
                                                     <rect key="frame" x="16" y="22" width="55" height="53"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -959,6 +958,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="12s-HQ-6wt"/>
+        <segue reference="Gew-Cm-GfC"/>
     </inferredMetricsTieBreakers>
 </document>
