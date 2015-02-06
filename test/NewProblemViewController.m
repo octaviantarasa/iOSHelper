@@ -51,7 +51,39 @@
                             problem[@"user_id"] = [PFUser currentUser].objectId;
                             problem[@"date"] = [NSDate date];
                             problem[@"picture"] = imageFile;
-                            [problem save];
+                            
+                            [problem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                if (succeeded) {
+                                    PFQuery *query = [PFUser query];
+                                    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                                        if (!error) {
+                                            NSMutableArray *userIds = [[NSMutableArray alloc] init];
+                                            for (PFUser *user in objects) {
+                                                [userIds addObject: user.objectId];
+                                            }
+                                            PFQuery *pushQuery = [PFInstallation query];
+                                            [pushQuery whereKey:@"user" containedIn: userIds];
+                                            
+                                            PFPush *pushNotification = [[PFPush alloc] init];
+                                            
+                                            NSDictionary *data = @{@"alert": [NSString stringWithFormat:@"A user have created a ticket with name: %@. Look up in problem details to see if you can help him.", problem[@"title"]],
+                                                                   @"idP" : problem.objectId};
+                                            
+                                            [pushNotification setQuery: pushQuery];
+                                            [pushNotification setData: data];
+                                            [pushNotification sendPushInBackground];
+                                            
+                                        }
+                                    }];
+                                }
+                                else
+                                {
+                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Internet connection problem, please try again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                                    [alert show];
+                                }
+                            }];
+
+                            
                             problemTitle.text = @"";
                             problemDescription.text = @"";
                             problemDirection.text = @"";

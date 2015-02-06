@@ -16,6 +16,9 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+
+#import "AppDelegate.h"
+
 @interface InitialFeedTableViewController ()
 
 @end
@@ -230,6 +233,10 @@ static NSString * const FUITableViewControllerCellReuseIdentifier = @"FUITableVi
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"ToDetailedFeed"]) {
+        AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        appdelegate.window.rootViewController = [segue destinationViewController];
+
         FeedTableViewController * feedTableViewController = [segue destinationViewController];
         
 //        [feedTableViewController.currentUser copy:currentUser];

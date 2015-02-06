@@ -28,7 +28,17 @@
     goTo[@"problem_id"] = problemId;
     goTo[@"time"] = min;
     [goTo save];
+    
+    PFQuery *pushQuery = [PFInstallation query];
+    
+    [pushQuery whereKey:@"user" equalTo: goTo[@"user_id"]];
+    
+    PFPush *pushNotification = [[PFPush alloc] init];
+    [pushNotification setQuery: pushQuery];
+    [pushNotification setMessage: [NSString stringWithFormat:@"A user is coming to help you. He estimated that he will arrive in %@ minutes", goTo[@"time"]]];
+    [pushNotification sendPushInBackground];
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
-  
+    
 }
 @end

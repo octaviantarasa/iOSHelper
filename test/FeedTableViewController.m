@@ -136,7 +136,12 @@
 - (IBAction) logOutButtonTouchHandler:(id)sender{
     
      [PFUser logOut];
-    [self dismissViewControllerAnimated:YES completion:^{}];
+    
+    AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    UINavigationController *navController = [self.storyboard instantiateViewControllerWithIdentifier:@"InitialNav"];
+    
+    appdelegate.window.rootViewController = navController;
 }
 
 
@@ -167,7 +172,10 @@
     if([[problem objectForKey:@"user_id"] isEqual:[PFUser currentUser].objectId]){
         cell.quickButton.hidden = YES;
         //set color for your problems
-        
+    }
+    else
+    {
+        cell.quickButton.hidden = NO;
     }
     
     [cell.problemTitle setTitle:[problem objectForKey:@"title"] forState:UIControlStateNormal];

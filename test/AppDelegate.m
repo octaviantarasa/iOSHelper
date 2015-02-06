@@ -12,6 +12,8 @@
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <ParseUI/ParseUI.h>
+
+#import "DetailedProblemViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -32,15 +34,35 @@
     
     [PFFacebookUtils initializeFacebook];
     
-    
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds] ];
-    Main = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    self.myViewController = [Main instantiateInitialViewController];
-    
-    self.window.rootViewController = self.myViewController;
-    [self.window makeKeyAndVisible];
-  
+    // Handle remote notification
+    if (launchOptions != nil)
+    {
+        NSDictionary* dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (dictionary != nil)
+        {
+            NSLog(@"Launched from push notification: %@", dictionary);
+            
+            NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
+            if (![token isEqualToString:@"0"])
+            {
+                [self performSelector:@selector(handleRemoteNotification:)
+                           withObject:dictionary
+                           afterDelay:0];
+            }
+        }
+    }
 
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+    else
+    {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeNone)];
+    }
+    
     
 //    
 //    NSLog(@"this shit = %d", [FBSession activeSession].isOpen);
@@ -83,4 +105,138 @@
 //    NSLog(@"%@", [locations lastObject]);
 }
 
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Store the deviceToken in the current installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    currentInstallation.channels = @[ @"global" ];
+    if ([PFUser currentUser].objectId)
+    {
+        currentInstallation[@"user"] = [PFUser currentUser].objectId;
+    }
+    [currentInstallation saveInBackground];
+}
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+//    [PFPush handlePush:userInfo];
+//}
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    NSLog(@"Received notification: %@", userInfo);
+    BOOL afterLaunching = ([application applicationState] == UIApplicationStateActive) ? NO : YES;
+    [self handleRemoteNotification:userInfo afterLaunchingApp:afterLaunching];
+}
+- (void)handleRemoteNotification:(NSDictionary *)userInfo
+{
+    [self handleRemoteNotification:userInfo afterLaunchingApp:YES];
+}
+
+- (void)handleRemoteNotification:(NSDictionary *)userInfo afterLaunchingApp:(BOOL)afterLaunching
+{
+    if (afterLaunching)
+    {
+        NSString *alertMessage = userInfo[@"aps"][@"alert"];
+        NSString *problemId = userInfo[@"idP"];
+        if (problemId.length > 0) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                message:alertMessage
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Close"
+                                                      otherButtonTitles:@"View", nil];
+            alertView.tag = 100;
+            [alertView show];
+            
+        }
+        else
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                message:alertMessage
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles: nil];
+            [alertView show];
+        }
+    }
+    else
+    {
+        self.userInfo = userInfo;
+        
+        NSString *alertMessage = userInfo[@"aps"][@"alert"];
+        NSString *problemId = userInfo[@"idP"];
+        if (problemId.length > 0) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                message:alertMessage
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Close"
+                                                      otherButtonTitles:@"View", nil];
+            alertView.tag = 100;
+            [alertView show];
+
+        }
+        else
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                message:alertMessage
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles: nil];
+            [alertView show];
+        }
+    }
+    
+    /* Trigger refresh from push notification
+     BOOL shouldRefresh = [userInfo[@"refresh"] boolValue];
+     if (shouldRefresh) [[AppModel sharedModel] refreshDataFromServer];
+     */
+}
+
+- (void)presentModalViewControllerForNotification:(NSDictionary *)userInfo
+{
+    NSString *problemID = userInfo[@"idP"];
+    PFObject *targetProblem = [PFObject objectWithoutDataWithClassName:@"Problems"
+                                                            objectId:problemID];
+    
+    // Fetch photo object
+    [targetProblem fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error)
+    {
+        if (!error && [PFUser currentUser])
+        {
+            //self.window.rootViewController = self.myViewController;
+            
+            UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+            UIViewController *visibleViewController = tabBarController.selectedViewController;
+
+            
+            
+            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+            
+            DetailedProblemViewController *detailed = [mainStoryboard instantiateViewControllerWithIdentifier:@"DetailedProblemViewController"];
+            detailed.problemId = problemID;
+            detailed.problem = object;
+            
+            if (tabBarController.selectedViewController == tabBarController.moreNavigationController)
+            {
+                UINavigationController *selectedNavController = tabBarController.moreNavigationController;
+                visibleViewController = selectedNavController.visibleViewController;
+            }
+            else if ([tabBarController.selectedViewController isKindOfClass:[UINavigationController class]])
+            {
+                UINavigationController *selectedNavController = (UINavigationController *)tabBarController.selectedViewController;
+                if (selectedNavController.visibleViewController) visibleViewController = selectedNavController.visibleViewController;
+            }
+            
+            [visibleViewController.navigationController pushViewController:detailed animated:YES];
+        }
+    }];
+}
+
+
+#pragma mark Alert View delegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 100)
+    {
+        if (buttonIndex == 1) [self presentModalViewControllerForNotification:self.userInfo];
+    }
+}
 @end

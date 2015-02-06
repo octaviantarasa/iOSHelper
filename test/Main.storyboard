@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Nag-1m-pPU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Nag-1m-pPU">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -140,7 +140,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="WFb-FQ-dlb">
             <objects>
-                <tabBarController id="raG-D0-8qe" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBar" id="raG-D0-8qe" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="q9n-W7-jZ4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -156,7 +156,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5pT-KV-i2V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="812" y="111"/>
+            <point key="canvasLocation" x="744" y="105"/>
         </scene>
         <!--Profile-->
         <scene sceneID="rUc-c1-tfJ">
@@ -261,7 +261,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eo6-88-iCR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-145" y="1743"/>
+            <point key="canvasLocation" x="-299" y="1829"/>
         </scene>
         <!--Feed Table View Controller-->
         <scene sceneID="I1B-Cn-xfU">
@@ -352,6 +352,16 @@
                                 <rect key="frame" x="0.0" y="401" width="320" height="54"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tHu-c5-Ixt">
+                                        <rect key="frame" x="205" y="12" width="107" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <state key="normal" title="New Problem">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="newProblem:" destination="r2Z-ma-4M2" eventType="touchUpInside" id="ytK-ED-nQf"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eeN-bW-GOP">
                                         <rect key="frame" x="8" y="5" width="151" height="43"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -362,17 +372,6 @@
                                         </state>
                                         <connections>
                                             <action selector="logOutButtonTouchHandler:" destination="r2Z-ma-4M2" eventType="touchUpInside" id="kyy-Qn-W9C"/>
-                                            <segue destination="OWv-yW-ZEZ" kind="custom" identifier="logOutSegue" id="tFO-18-9If"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tHu-c5-Ixt">
-                                        <rect key="frame" x="205" y="12" width="107" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                        <state key="normal" title="New Problem">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="newProblem:" destination="r2Z-ma-4M2" eventType="touchUpInside" id="ytK-ED-nQf"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -393,22 +392,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yfE-w6-zSF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="359" y="1711"/>
+            <point key="canvasLocation" x="355" y="1743"/>
         </scene>
         <!--Comments View Controller-->
         <scene sceneID="OQK-kP-GAe">
             <objects>
                 <viewController title="Comments View Controller" id="DLl-4e-dr5" customClass="CommentsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9mH-2G-nQv">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="o1s-qV-P3f">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                <rect key="frame" x="-1" y="-1" width="320" height="456"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="asj-cj-yNn">
-                                        <rect key="frame" x="0.0" y="411" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="412" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IdJ-WJ-dbf">
@@ -431,7 +430,7 @@
                                         <color key="backgroundColor" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="22" sectionFooterHeight="22" id="OQf-rR-xuM">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="411"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="412"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -580,7 +579,7 @@
         <!--Detailed Problem-->
         <scene sceneID="XFV-yv-WaZ">
             <objects>
-                <viewController title="Detailed Problem" id="Au9-qS-WON" customClass="DetailedProblemViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailedProblemViewController" title="Detailed Problem" id="Au9-qS-WON" customClass="DetailedProblemViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ddk-BU-54l">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -851,11 +850,11 @@
             <objects>
                 <viewController title="Initial Feed Table" id="Nag-1m-pPU" customClass="InitialFeedTableViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1k9-Db-Hs4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" sectionHeaderHeight="22" sectionFooterHeight="22" id="jx2-ll-sTA">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="461"/>
+                                <rect key="frame" x="-1" y="-1" width="320" height="462"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -905,7 +904,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gzc-Jh-Yfp">
-                                <rect key="frame" x="85" y="461" width="151" height="43"/>
+                                <rect key="frame" x="85" y="461" width="150" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
@@ -928,12 +927,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JSA-jB-NnV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="323" y="111"/>
+            <point key="canvasLocation" x="255" y="127"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="94d-8L-i4G">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OWv-yW-ZEZ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="InitialNav" automaticallyAdjustsScrollViewInsets="NO" id="OWv-yW-ZEZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6ak-JJ-Dmz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -946,7 +945,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Vi-8l-Yr2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-215" y="105"/>
+            <point key="canvasLocation" x="-203" y="127"/>
         </scene>
     </scenes>
     <resources>
