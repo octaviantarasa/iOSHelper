@@ -5,6 +5,8 @@
 //  Created by Tarasa on 12/9/14.
 //  Copyright (c) 2014 Tarasa. All rights reserved.
 //
+#import "UITableViewCell+FlatUI.h"
+#import "UIColor+FlatUI.h"
 
 #import "InitialFeedTableViewController.h"
 #import "InitialProblemTableViewCell.h"
@@ -17,7 +19,7 @@
 @interface InitialFeedTableViewController ()
 
 @end
-
+static NSString * const FUITableViewControllerCellReuseIdentifier = @"FUITableViewControllerCellReuseIdentifier";
 @implementation InitialFeedTableViewController{
     CLLocationManager *locationManager;
 }
@@ -25,21 +27,28 @@
 @synthesize currentUser;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the
+    self.title = @"Auto Helper:Problems";
+    self.view.
+    backgroundColor = [UIColor turquoiseColor];
+    self.myTableView.separatorColor = [UIColor midnightBlueColor];
+    self.myTableView.backgroundColor = [UIColor lightGrayColor];
     
-//    locationManager = [[CLLocationManager alloc] init];
-//    locationManager.delegate = self;
-//    
-//    locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
-//    
-//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
-//        [locationManager requestWhenInUseAuthorization];
-//        [locationManager requestAlwaysAuthorization];
-//        
-//    }
-//    locationManager.distanceFilter = 1;
-//    [locationManager startUpdatingLocation];
-//    
+    [self.myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:FUITableViewControllerCellReuseIdentifier];
+    
+    
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    
+    locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+        [locationManager requestWhenInUseAuthorization];
+        [locationManager requestAlwaysAuthorization];
+        
+    }
+    locationManager.distanceFilter = 1;
+    [locationManager startUpdatingLocation];
 
 
     [self getDataFromParse];
@@ -155,7 +164,11 @@
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell";
+    UIRectCorner corners = 0.2;
     InitialProblemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    [cell configureFlatCellWithColor:[UIColor cloudsColor]
+                    selectedColor:[UIColor cloudsColor]
+                roundingCorners:corners];
     
     cell.problemComment.text = nil;
     cell.problemHour.text = nil;
@@ -164,7 +177,11 @@
     PFObject *problem = [self.problemsArray objectAtIndex:indexPath.row];
     
     [cell.problemTitle setText:[problem objectForKey:@"title"]];
-
+    [cell.problemTitle setTextColor:[UIColor wetAsphaltColor]];
+    [cell.problemComment setTextColor:[UIColor wetAsphaltColor]];
+    [cell.problemHour setTextColor:[UIColor wetAsphaltColor]];
+    
+   // [cell.textLabel setTextColor:[UIColor whiteColor]];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"M/d H:m"];
     NSString *stringFromDate = [formatter stringFromDate:[problem objectForKey:@"date"]];
