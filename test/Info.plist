@@ -36,9 +36,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>semi bau bau</string>
+	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>bau bau</string>
+	<string></string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
