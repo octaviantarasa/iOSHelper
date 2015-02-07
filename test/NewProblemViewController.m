@@ -55,6 +55,7 @@
                             [problem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                                 if (succeeded) {
                                     PFQuery *query = [PFUser query];
+                                    [query whereKey:@"objectId" notEqualTo:[PFUser currentUser].objectId];
                                     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                                         if (!error) {
                                             NSMutableArray *userIds = [[NSMutableArray alloc] init];

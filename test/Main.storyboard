@@ -508,6 +508,34 @@
             </objects>
             <point key="canvasLocation" x="1045" y="1897"/>
         </scene>
+        <!--Location-->
+        <scene sceneID="XZ7-4j-n6M">
+            <objects>
+                <viewController storyboardIdentifier="Location" id="n2a-IA-d9Y" customClass="LocationViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cA5-27-63G">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="npH-jz-q12">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="n2a-IA-d9Y" id="Ibj-2A-Pdl"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" title="Location" id="3FC-Qg-0Me"/>
+                    <connections>
+                        <outlet property="mapView" destination="npH-jz-q12" id="waX-bc-eEx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f6c-va-dYf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2281" y="1884"/>
+        </scene>
         <!--Quick View Controller-->
         <scene sceneID="i3f-vv-cSv">
             <objects>
@@ -696,7 +724,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="404-1n-TzA"/>
+                    <navigationItem key="navigationItem" id="404-1n-TzA">
+                        <barButtonItem key="rightBarButtonItem" title="See on map" id="uhk-9l-0QG">
+                            <connections>
+                                <action selector="seeOnMapPressed:" destination="Au9-qS-WON" id="9nc-gs-AHY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="detailedComments" destination="L6e-mV-6fU" id="9AZ-l1-X1G"/>
                         <outlet property="detailedDelete" destination="Mf8-GC-cde" id="JWf-3b-4UU"/>
@@ -713,6 +747,7 @@
                         <outlet property="detailedUserHelper" destination="qad-lR-7LR" id="722-gl-ada"/>
                         <outlet property="detailedUserProper" destination="J33-qy-Xft" id="Ai8-aq-GM0"/>
                         <outlet property="detailedWillHelp" destination="hqL-Ba-iKq" id="Slo-4S-QN8"/>
+                        <outlet property="seeOnMap" destination="uhk-9l-0QG" id="gOA-I6-FFS"/>
                         <segue destination="DLl-4e-dr5" kind="push" identifier="showComments" id="12s-HQ-6wt"/>
                     </connections>
                 </viewController>
@@ -947,6 +982,24 @@
             </objects>
             <point key="canvasLocation" x="-203" y="127"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="boM-R6-EVS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ldS-fi-vbY" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cVS-Ge-8Qq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="n2a-IA-d9Y" kind="relationship" relationship="rootViewController" id="Ync-c2-Z2g"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0nL-6f-cYP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1749" y="1884"/>
+        </scene>
     </scenes>
     <resources>
         <image name="login-button-small.png" width="151" height="43"/>
@@ -957,6 +1010,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Gew-Cm-GfC"/>
+        <segue reference="12s-HQ-6wt"/>
     </inferredMetricsTieBreakers>
 </document>

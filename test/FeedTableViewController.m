@@ -224,6 +224,7 @@
         DetailedProblemViewController *detailed = [segue destinationViewController];
         ProblemTableViewCell *clickedCell = (ProblemTableViewCell *)[self.myTableView cellForRowAtIndexPath: indexPath];
         detailed.problemId =clickedCell.problemId;
+        detailed.problem = [self.problemsArray objectAtIndex:indexPath.row];
     }
     else if ([[segue identifier] isEqualToString:@"showNewProblem"]){
         NewProblemViewController *newPVC = [segue destinationViewController];

@@ -10,7 +10,7 @@
 #import "CommentsViewController.h"
 //#import "AppDelegate.h"
 #import <Parse/Parse.h>
-
+#import "LocationViewController.h"
 @interface DetailedProblemViewController ()
 
 @end
@@ -21,7 +21,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self getDataFromParse];
+    if (!self.problem) {
+        [self getDataFromParse];
+    }
+    else
+    {
+        [self fillAllOutlets];
+    }
+    
+    PFGeoPoint *geoPoint = [self.problem objectForKey:@"location"];
+    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude);
+    if (location.latitude == 0 && location.longitude == 0) {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
     
 }
 
@@ -186,4 +198,14 @@
 }
 */
 
+- (IBAction)seeOnMapPressed:(id)sender {
+    LocationViewController *locationVC = [self.storyboard instantiateViewControllerWithIdentifier:@"Location"];
+    
+    PFGeoPoint *geoPoint = [self.problem objectForKey:@"location"];
+    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude);
+    
+    locationVC.problemLocation = location;
+    
+    [self.navigationController pushViewController: locationVC animated:YES];
+}
 @end

@@ -25,7 +25,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *detailedUserHelper;
 @property (weak, nonatomic) IBOutlet UILabel *detailedWillHelp;
 @property (weak, nonatomic) IBOutlet UILabel *detailedUserProper;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *seeOnMap;
 
 @property (strong, nonatomic) NSString *problemId;
 @property (strong, nonatomic) PFObject *problem;
+- (IBAction)seeOnMapPressed:(id)sender;
 @end

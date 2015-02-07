@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		413877F01A8589D2003D4DEA /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413877EF1A8589D2003D4DEA /* LocationViewController.m */; };
+		413877F31A858A84003D4DEA /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 413877F21A858A84003D4DEA /* Location.m */; };
 		726180F01A7E660400771DBF /* FUIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 726180C91A7E660400771DBF /* FUIAlertView.m */; };
 		726180F11A7E660400771DBF /* FUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 726180CB1A7E660400771DBF /* FUIButton.m */; };
 		726180F21A7E660400771DBF /* FUICellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 726180CD1A7E660400771DBF /* FUICellBackgroundView.m */; };
@@ -84,6 +86,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		413877EE1A8589D2003D4DEA /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationViewController.h; sourceTree = "<group>"; };
+		413877EF1A8589D2003D4DEA /* LocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationViewController.m; sourceTree = "<group>"; };
+		413877F11A858A84003D4DEA /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		413877F21A858A84003D4DEA /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		726180C71A7E660400771DBF /* FlatUIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlatUIKit.h; path = uiflat/FlatUIKit.h; sourceTree = "<group>"; };
 		726180C81A7E660400771DBF /* FUIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FUIAlertView.h; path = uiflat/FUIAlertView.h; sourceTree = "<group>"; };
 		726180C91A7E660400771DBF /* FUIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FUIAlertView.m; path = uiflat/FUIAlertView.m; sourceTree = "<group>"; };
@@ -455,6 +461,10 @@
 				76E4A5861A0FAB7800841FCF /* Supporting Files */,
 				7623737B1A841231004ABE37 /* LocationManagerSingleton.h */,
 				7623737C1A841231004ABE37 /* LocationManagerSingleton.m */,
+				413877EE1A8589D2003D4DEA /* LocationViewController.h */,
+				413877EF1A8589D2003D4DEA /* LocationViewController.m */,
+				413877F11A858A84003D4DEA /* Location.h */,
+				413877F21A858A84003D4DEA /* Location.m */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -609,6 +619,7 @@
 				726181031A7E660500771DBF /* UIToolbar+FlatUI.m in Sources */,
 				726180F31A7E660400771DBF /* FUIPopoverBackgroundView.m in Sources */,
 				7608E7101A20BF180088E274 /* StatisticsViewController.m in Sources */,
+				413877F01A8589D2003D4DEA /* LocationViewController.m in Sources */,
 				7608E7131A20BF270088E274 /* ProfileViewController.m in Sources */,
 				76ADD83F1A2C942700AA84F4 /* CommentsTableViewCell.m in Sources */,
 				726180FA1A7E660500771DBF /* UIFont+FlatUI.m in Sources */,
@@ -620,6 +631,7 @@
 				7655A76C1A2BD9EE00807363 /* CommentsViewController.m in Sources */,
 				726180F21A7E660400771DBF /* FUICellBackgroundView.m in Sources */,
 				726180FE1A7E660500771DBF /* UIProgressView+FlatUI.m in Sources */,
+				413877F31A858A84003D4DEA /* Location.m in Sources */,
 				726181001A7E660500771DBF /* UIStepper+FlatUI.m in Sources */,
 				726181011A7E660500771DBF /* UITabBar+FlatUI.m in Sources */,
 				726180F71A7E660500771DBF /* NSString+Icons.m in Sources */,
