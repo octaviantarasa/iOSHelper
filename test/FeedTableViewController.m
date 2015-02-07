@@ -5,6 +5,8 @@
 //  Created by Tarasa on 11/19/14.
 //  Copyright (c) 2014 Tarasa. All rights reserved.
 //
+#import "UITableViewCell+FlatUI.h"
+#import "UIColor+FlatUI.h"
 
 #import "FeedTableViewController.h"
 #import "LocationManagerSingleton.h"
@@ -27,6 +29,7 @@
 @implementation FeedTableViewController{
     CLLocationManager *locationManager;
 }
+static NSString * const FUITableViewControllerCellReuseIdentifier = @"FUITableViewControllerCellReuseIdentifier";
 @synthesize loginView;
 @synthesize myTableView;
 @synthesize FBButton;
@@ -41,6 +44,16 @@
     [refresh addTarget:self action:@selector(getNewData) forControlEvents:UIControlEventValueChanged];
     [self.myTableView addSubview:refresh];
     self.refreshControl = refresh;
+    self.title = @"Auto Helper";
+    self.view.
+    backgroundColor = [UIColor turquoiseColor];
+    self.myTableView.separatorColor = [UIColor midnightBlueColor];
+    self.myTableView.backgroundColor = [UIColor lightGrayColor];
+    
+    [self.myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:FUITableViewControllerCellReuseIdentifier];
+    
+
+    
    
     
 }
@@ -163,7 +176,7 @@
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell";
-    
+    UIRectCorner corners = 0.2;
     ProblemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
    
     
@@ -179,6 +192,8 @@
     }
     
     [cell.problemTitle setTitle:[problem objectForKey:@"title"] forState:UIControlStateNormal];
+    
+    [cell.problemHour setTextColor:[UIColor wetAsphaltColor]];
     
     cell.userId = [problem objectForKey:@"user_id"];
     
@@ -206,6 +221,15 @@
         cell.problemImage.file = [problem objectForKey:@"picture"];
         [cell.problemImage loadInBackground];
     }
+ 
+     [cell.problemComment setTintColor:[UIColor wetAsphaltColor]];
+    [cell.problemHour setTextColor:[UIColor blueColor]];
+    [cell.quickButton setTintColor:[UIColor greenSeaColor]];
+    [cell configureFlatCellWithColor:[UIColor cloudsColor]
+                       selectedColor:[UIColor cloudsColor]
+                     roundingCorners:corners];
+    
+   
 
     return cell;
 }
@@ -249,6 +273,7 @@
         ProblemTableViewCell *clickedCell = (ProblemTableViewCell *) [[sender superview] superview];
         modal.image.image = clickedCell.imageView.image;
     }
+    
     
 }
 

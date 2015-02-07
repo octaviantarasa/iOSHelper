@@ -16,12 +16,15 @@
 {
     [super viewDidLoad];
     self.title = @"Quick Solve";
-    self.view.backgroundColor = [UIColor turquoiseColor];
+    self.view.backgroundColor = [UIColor cloudsColor];
     
 }
 - (IBAction)send:(id)sender{
-    
-    NSNumber *min = [NSNumber numberWithInteger:[picker minuteInterval]];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"m"];
+    NSString *stringFromDate = [formatter stringFromDate:[picker date]];
+    NSInteger nr = [stringFromDate integerValue];
+    NSNumber *min = [NSNumber numberWithInteger:nr];
     PFObject *goTo = [PFObject objectWithClassName:@"GoTo"];
     goTo[@"send_user_id"] = [PFUser currentUser].objectId;
     goTo[@"user_id"] = userId;

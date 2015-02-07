@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ProfileViewController : UIViewController
-
+@property (weak,nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak,nonatomic) IBOutlet UILabel *name;
 @end

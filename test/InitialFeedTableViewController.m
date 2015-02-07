@@ -32,8 +32,8 @@ static NSString * const FUITableViewControllerCellReuseIdentifier = @"FUITableVi
     [super viewDidLoad];
     // Do any additional setup after loading the
     self.title = @"Auto Helper:Problems";
-    self.view.
-    backgroundColor = [UIColor turquoiseColor];
+   // self.view.
+   // backgroundColor = [UIColor turquoiseColor];
     self.myTableView.separatorColor = [UIColor midnightBlueColor];
     self.myTableView.backgroundColor = [UIColor lightGrayColor];
     

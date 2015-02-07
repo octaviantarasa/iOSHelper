@@ -21,22 +21,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+<<<<<<< HEAD
     if (!self.problem) {
         [self getDataFromParse];
-         self.title = @"Can you help?";
     }
     else
     {
         [self fillAllOutlets];
     }
     
-   
-    
     PFGeoPoint *geoPoint = [self.problem objectForKey:@"location"];
     CLLocationCoordinate2D location = CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude);
     if (location.latitude == 0 && location.longitude == 0) {
         self.navigationItem.rightBarButtonItem = nil;
     }
+=======
+    [self getDataFromParse];
+    self.title = @"Can you help?";
+>>>>>>> interfata
     
 }
 
