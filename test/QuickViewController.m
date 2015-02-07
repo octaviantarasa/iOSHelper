@@ -16,7 +16,7 @@
 {
     [super viewDidLoad];
     self.title = @"Quick Solve";
-    self.view.backgroundColor = [UIColor turquoiseColor];
+    self.view.backgroundColor = [UIColor cloudsColor];
     
 }
 - (IBAction)send:(id)sender{

@@ -5,6 +5,8 @@
 //  Created by Tarasa on 11/22/14.
 //  Copyright (c) 2014 Tarasa. All rights reserved.
 //
+#import "UITableViewCell+FlatUI.h"
+#import "UIColor+FlatUI.h"
 
 #import "StatisticsViewController.h"
 #import "StatisticsTableViewCell.h"
@@ -18,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //self.view.backgroundColor = [UIColor turquoiseColor];
     
     [self getDataFromParse];
 }
@@ -126,7 +129,7 @@
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    UIRectCorner corners = 0.2;
     static NSString *CellIdentifier = @"Cell";
     StatisticsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
@@ -134,6 +137,11 @@
     cell.labelCount.text = [[self.statisticsArrayCount objectAtIndex:indexPath.row] stringValue];
    cell.progress.progress = [[self.statisticsArrayCount objectAtIndex:indexPath.row] floatValue]/10.0;
     
+    [cell.label setTextColor:[UIColor wetAsphaltColor]];
+    [cell.labelCount setTextColor:[UIColor wetAsphaltColor]];
+    [cell configureFlatCellWithColor:[UIColor cloudsColor]
+                       selectedColor:[UIColor cloudsColor]
+                     roundingCorners:corners];
         return cell;
     
    

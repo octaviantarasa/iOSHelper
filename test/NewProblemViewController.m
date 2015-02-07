@@ -8,6 +8,7 @@
 
 #import "NewProblemViewController.h"
 #import "LocationManagerSingleton.h"
+#import "UIColor+FlatUI.h"
 
 #import <Parse/Parse.h>
 @interface NewProblemViewController ()
@@ -19,6 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem.backBarButtonItem setAction:@selector(performBackNavigation:)];
+    self.title = @"What's the problem?";
+    self.view.backgroundColor = [UIColor cloudsColor];
   
     // Do any additional setup after loading the view.
 }

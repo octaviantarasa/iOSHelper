@@ -5,6 +5,8 @@
 //  Created by Tarasa on 11/22/14.
 //  Copyright (c) 2014 Tarasa. All rights reserved.
 //
+#import "UITableViewCell+FlatUI.h"
+#import "UIColor+FlatUI.h"
 
 #import "UserActivityViewController.h"
 #import "UserActivityTableViewCell.h"
@@ -22,6 +24,8 @@
     [self.myActivityTableView addSubview:refresh];
     self.refreshControl = refresh;
     self.myActivityTableView.delegate = self;
+    self.title = @"Activity";
+    self.view.backgroundColor = [UIColor cloudsColor];
     [self getDataFromParse];
     // Do any additional setup after loading the view.
 }
@@ -167,8 +171,16 @@
     [formatter setDateFormat:@"M/d H:m"];
     NSString *stringFromDate = [formatter stringFromDate:[activity objectForKey:@"date"]];
     cell.date.text = stringFromDate;
-
     
+    
+     UIRectCorner corners = 0.2;
+    [cell.user setTextColor:[UIColor wetAsphaltColor]];
+    [cell.problem setTextColor:[UIColor wetAsphaltColor]];
+    [cell.date setTintColor:[UIColor greenSeaColor]];
+    
+    [cell configureFlatCellWithColor:[UIColor cloudsColor]
+                       selectedColor:[UIColor cloudsColor]
+                     roundingCorners:corners];
     
     
     //    PFObject *problem = [self.problemsArray objectAtIndex:indexPath.row];

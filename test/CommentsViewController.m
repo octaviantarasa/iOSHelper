@@ -5,6 +5,8 @@
 //  Created by Tarasa on 11/30/14.
 //  Copyright (c) 2014 Tarasa. All rights reserved.
 //
+#import "UIColor+FlatUI.h"
+#import "UITableViewCell+FlatUI.h"
 
 #import "CommentsViewController.h"
 #import "CommentsTableViewCell.h"
@@ -30,6 +32,7 @@
     // Do any additional setup after loading the view.
     [self getDataFromParse];
     commentTextField.delegate =self;
+    self.view.backgroundColor = [UIColor cloudsColor];
 
 }
 
@@ -91,7 +94,13 @@
         cell.commentImage.file = [comment objectForKey:@"image"];
         [cell.commentImage loadInBackground];
     }
-    
+    UIRectCorner corners = 0.2;
+    [cell.commentText setTintColor:[UIColor wetAsphaltColor]];
+    [cell.commentUser setTextColor:[UIColor wetAsphaltColor]];
+    [cell.commentHour setTextColor:[UIColor blueColor]];
+    [cell configureFlatCellWithColor:[UIColor cloudsColor]
+                       selectedColor:[UIColor cloudsColor]
+                     roundingCorners:corners];
     return cell;
 }
 

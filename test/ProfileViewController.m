@@ -7,6 +7,7 @@
 //
 
 #import "ProfileViewController.h"
+#import "UIColor+FlatUI.h"
 
 @interface ProfileViewController ()
 
@@ -16,6 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Profile";
+    self.view.backgroundColor = [UIColor cloudsColor];
     // Do any additional setup after loading the view.
 }
 
